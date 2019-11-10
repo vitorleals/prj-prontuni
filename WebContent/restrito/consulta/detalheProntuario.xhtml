@@ -1,0 +1,237 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<style type="text/css">
+.logo  td {
+	width: 5%;
+}
+
+.detail {
+	width: 95%;
+	padding-left: 25px;
+}
+
+.detail td {
+	font-size: 24px;
+}
+</style>
+
+
+	<ui:define name="title">Prontuário</ui:define>
+
+	<ui:define name="menu">
+
+
+	</ui:define>
+
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+			<h1 style="margin-left: 8px; font-size: 2vw">Prontuário</h1>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-2" style="align-items: center">
+
+					<p:panel header="Dados Pessoais">
+
+						<p:graphicImage library="prontuni"
+							name="/images/iconfinder_user_1287507.png"
+							style="width:7vw; margin-left:2.5vw" />
+
+						<p:outputLabel id="nomeProntario"
+							value="#{prontuarioMB.prontuario.paciente.nome}"
+							style="font-size:1.5vw;font-weight: bold;display:block;margin-top:1vw;text-align:center" />
+
+						<p:outputLabel id="codProntario"
+							value="#{prontuarioMB.prontuario.cod_prontuario}"
+							style="font-size:1vw;display:block;text-align:center" />
+
+
+						<p:panelGrid layout="grid" columns="1" styleClass="ui-noborder"
+							style="font-size:1vw">
+
+							<p:outputLabel value="CPF:" style="font-weight: bold" />
+							<p:outputLabel value="#{prontuarioMB.prontuario.paciente.cpf}" />
+
+							<p:outputLabel value="RG:" style="font-weight: bold" />
+							<p:outputLabel value="#{prontuarioMB.prontuario.paciente.rg}" />
+
+							<p:outputLabel value="Data de Nascimento:"
+								style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.dt_nascimento}" />
+
+							<p:outputLabel value="Sexo:" style="font-weight: bold" />
+							<p:outputLabel value="#{prontuarioMB.prontuario.paciente.sexo}" />
+
+							<p:outputLabel value="Mãe:" style="font-weight: bold" />
+							<p:outputLabel value="#{prontuarioMB.prontuario.paciente.mae}" />
+
+							<p:outputLabel value="Pai:" style="font-weight: bold" />
+							<p:outputLabel value="#{prontuarioMB.prontuario.paciente.pai}" />
+
+							<p:outputLabel value="Contato:" style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.celular}" />
+
+							<p:outputLabel value="Nacionalidade:" style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.nacionalidade}" />
+
+							<p:outputLabel value="Naturalidade:" style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.naturalidade}" />
+
+							<p:outputLabel value="Ocupação:" style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.ocupacao}" />
+
+							<p:outputLabel value="Estado Civil:" style="font-weight: bold" />
+							<p:outputLabel
+								value="#{prontuarioMB.prontuario.paciente.estado_civil}" />
+
+
+						</p:panelGrid>
+
+					</p:panel>
+
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-10">
+
+					<p:panel header="Histórico">
+
+
+						<p:repeat value="#{prontuarioMB.historicoConsulta}" var="con">
+							<p:panelGrid columns="2" style="width:30%;"
+								styleClass="ui-noborder">
+								<p:commandLink update=":form:conDetail"
+									oncomplete="PF('conDialog').show()">
+									<f:setPropertyActionListener value="#{con}"
+										target="#{prontuarioMB.consultaSelecionada}" />
+									<p:graphicImage style="width:7vw;" library="prontuni"
+										name="/images/iconfinder_Clock_381590.png" />
+
+								</p:commandLink>
+
+								<p:outputPanel>
+									<h:panelGrid columns="2" cellpadding="5">
+										<h:outputText value="Data do atendimento:" />
+										<h:outputText value="#{con.inicio_consulta}"
+											style="font-weight: bold" escape="false">
+											<f:convertDateTime pattern="HH:mm dd/MM/yyyy" />
+										</h:outputText>
+
+										<h:outputText value="Relato do paciente:" />
+										<h:outputText value="#{con.relato_paciente}"
+											style="font-weight: bold" escape="false" />
+
+										<h:outputText value="Hipótese diagnóstica:" />
+										<h:outputText value="#{con.hipotese_diagnostico}"
+											style="font-weight: bold" escape="false" />
+
+										<h:outputText value="Diagnóstico definitivo:" />
+										<h:outputText value="#{con.diagnostico}"
+											style="font-weight: bold" escape="false" />
+									</h:panelGrid>
+								</p:outputPanel>
+							</p:panelGrid>
+							<hr />
+						</p:repeat>
+
+						<p:dialog header="Consulta Info" widgetVar="conDialog"
+							modal="true" showEffect="blind" hideEffect="explode"
+							resizable="false">
+							<p:outputPanel id="conDetail" style="text-align:center;">
+								<p:panelGrid columns="2"
+									rendered="#{not empty prontuarioMB.consultaSelecionada}"
+									columnClasses="label,value">
+									<f:facet name="header">
+										<p:graphicImage rendered="#{con.tipo_consulta == 'CONSULTA'}"
+											library="prontuni" name="/images/iconfinder_Clock_381590.png" />
+										<p:graphicImage
+											rendered="#{con.tipo_consulta == 'EMERGENCIA'}"
+											library="prontuni"
+											name="/images/iconfinder_Emergency_381598.png" />
+
+										<p:outputLabel
+											value="#{prontuarioMB.prontuario.paciente.nome}"
+											style="font-size:1.5vw;font-weight: bold;display:block;margin-top:1vw;text-align:center" />
+
+										<p:outputLabel
+											value="#{prontuarioMB.prontuario.cod_prontuario}"
+											style="font-size:1vw;display:block;text-align:center" />
+									</f:facet>
+
+									<h:outputText value="Data do atendimento:" />
+									<h:outputText value="#{con.inicio_consulta}"
+										style="font-weight: bold" escape="false">
+										<f:convertDateTime pattern="HH:mm dd/MM/yyyy" />
+									</h:outputText>
+
+									<h:outputText value="Relato do paciente:" />
+									<h:outputText value="#{con.relato_paciente}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Relato do paciente (Detalhes):" />
+									<h:outputText value="#{con.detalhe_relato}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Hipótese diagnóstica:" />
+									<h:outputText value="#{con.hipotese_diagnostico}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Hipótese diagnóstica (Detalhes):" />
+									<h:outputText value="#{con.hipotese_detalhe}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Diagnóstico definitivo:" />
+									<h:outputText value="#{con.diagnostico}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Diagnóstico definitivo (Detalhes):" />
+									<h:outputText value="#{con.detalhes_diagnostico}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Exame geral:" />
+									<h:outputText value="#{con.exame_geral}"
+										style="font-weight: bold" escape="false" />
+
+
+									<h:outputText value="Temperatura (°C):" />
+									<h:outputText value="#{con.temperatura}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Pressão arterial:" />
+									<h:outputText value="#{con.pressao_arterial}"
+										style="font-weight: bold" escape="false" />
+
+									<h:outputText value="Alergia:" />
+									<h:outputText value="#{con.alergia}" style="font-weight: bold"
+										escape="false" />
+								</p:panelGrid>
+
+							</p:outputPanel>
+						</p:dialog>
+
+
+					</p:panel>
+
+
+				</div>
+
+
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

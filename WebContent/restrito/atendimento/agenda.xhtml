@@ -1,0 +1,234 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="title">Agenda</ui:define>
+
+	<ui:define name="content">
+
+
+		<h:form id="form1">
+			<p:growl id="messages" showDetail="true" />
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-8">
+
+					<p:panel header="Acesso rápido">
+
+						<p:panelGrid layout="grid" columns="4" styleClass="ui-noborder"
+							style="width:60%;margin-left:auto;margin-right:auto;">
+
+							<p:commandLink id="novoAg" onClick="window.location='/restrito/atendimento/buscarAgendamento.jsf?faces-redirect=true';">
+								<p:graphicImage style="width:7vw;" library="prontuni"
+										name="/images/add-file.png" />
+								<p:tooltip id="toolTipNovoAg" for="novoAg"
+									value="Agendar atendimento" position="bottom" />
+							</p:commandLink>
+							<p:commandLink id="busagAg"
+								action="#{navMB.paginaListaAgendamento()}">
+								<p:graphicImage style="width:7vw;" library="prontuni"
+										name="/images/calendarVer.png" />
+								<p:tooltip id="toolTipBusagAg" for="busagAg"
+									value="Listar agendamentos" position="bottom" />
+							</p:commandLink>
+							<p:commandLink id="novoPac"
+								action="#{navMB.acaoCadastroPaciente()}">
+								<p:graphicImage style="width:7vw;" library="prontuni"
+										name="/images/add-user.png" />
+								<p:tooltip id="toolTipNovoPac" for="novoPac"
+									value="Cadastrar novo paciente" position="bottom" />
+							</p:commandLink>
+							<p:commandLink id="busagPac"
+								action="#{navMB.acaoListarPaciente()}">
+								<p:graphicImage style="width:7vw;" library="prontuni"
+										name="/images/user1.png" />
+								<p:tooltip id="toolTipBusagPac" for="busagPac"
+									value="Buscar Paciente" position="bottom" />
+							</p:commandLink>
+
+						</p:panelGrid>
+
+					</p:panel>
+
+					<p:panel header="Calendário" style="margin-top: 20px;">
+
+						<h3 style="margin-top: 20px;">Unidade:</h3>
+						<h3>Nome da unidade</h3>
+
+						<p:schedule id="agenda" value="#{agendamentoMB.agendamentos}"
+							widgetVar="agendaP" timeZone="GMT-3" view="month" locale="pt"
+							style="width:100%;height:100%; margin-top: 10px;"
+							displayEventEnd="false" centerHeaderTemplate="title"
+							draggable="false">
+
+							<p:ajax event="dateSelect"
+								listener="#{agendamentoMB.novoRegistro}" update="form1"
+								oncomplete="PF('dialog').show();" />
+
+							<p:ajax event="eventSelect"
+								listener="#{agendamentoMB.registroSelect}" update="form1"
+								oncomplete="PF('dialog').show();" />
+
+						</p:schedule>
+					</p:panel>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4">
+
+
+					<p:panel header="Atendimentos">
+						<p:dataScroller value="#{agendamentoMB.listaAgenda2}" var="ag"
+							chunkSize="5" scrollHeight="400" mode="inline">
+							<f:facet name="header">
+            Role para baixo para mais resultados
+        					</f:facet>
+
+							<h:panelGrid columns="2" style="width:100%"
+								columnClasses="logo,detail">
+								<pe:letterAvatar value="#{ag.paciente.nome}" height="50"
+									width="50" rounded="true" />
+
+								<p:outputPanel>
+									<h:panelGrid columns="2" cellpadding="3">
+										<h:outputText value="Paciente:" />
+										<h:outputText value="#{ag.paciente.nome}"
+											style="font-weight: bold" />
+
+										<h:outputText value="Médico:" />
+										<h:outputText value="#{ag.medico.nome}"
+											style="font-weight: bold" />
+
+										<h:outputText value="Data e Hora:" />
+										<h:outputText value="#{ag.data_inicio}"
+											style="font-weight: bold">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+
+										<h:outputText value="Status:" />
+										<h:outputText value="#{ag.status_agendamento}"
+											style="font-weight: bold" />
+
+									</h:panelGrid>
+								</p:outputPanel>
+							</h:panelGrid>
+							<p:separator />
+						</p:dataScroller>
+
+					</p:panel>
+
+					<p:panel header="Avisos">
+
+					</p:panel>
+
+
+
+				</div>
+			</div>
+
+			<p:dialog draggable="false" resizable="false" modal="true"
+				closable="true" widgetVar="dialog" header="Agendamento">
+
+				<h:panelGrid id="novoRegistro" columns="3" cellpadding="5">
+
+					<p:outputLabel value="Unidade:" for="unidade" />
+					<p:inputText id="unidade" required="true"
+						value="#{agendamentoMB.nomeUnidade}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						size="28" />
+
+					<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+						title="Pesquisa" action="#{selecaoUnidadeMB.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{agendamentoMB.unidadeSelecionada}" process="@this"
+							update="unidade" />
+						<p:resetInput target="unidade" />
+					</p:commandButton>
+
+
+					<p:outputLabel value="Tipo: " for="tipo" />
+					<p:selectOneMenu id="tipo" required="true"
+						value="#{agendamentoMB.agendamento.tipo}" style="width:205px">
+						<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+						<f:selectItems value="#{utilMB.listAtendimentos}" />
+					</p:selectOneMenu>
+					<h:outputLabel />
+
+					<p:outputLabel value="Dr.(a):" for="medico" />
+					<p:inputText id="medico" required="true"
+						value="#{agendamentoMB.nomeMedico}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						size="28" />
+
+					<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+						title="Pesquisa" action="#{selecaoMedicoMB.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{agendamentoMB.medicoSelecionado}" process="@this"
+							update="medico" />
+						<p:resetInput target="medico" />
+					</p:commandButton>
+
+					<p:outputLabel value="Paciente:" for="paciente" />
+					<p:inputText id="paciente" required="true"
+						value="#{agendamentoMB.nomePaciente}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						size="28" />
+
+					<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+						title="Pesquisa" action="#{selecaoPacienteMB.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{agendamentoMB.pacienteSelecionado}" process="@this"
+							update="paciente" />
+						<p:resetInput target="paciente" />
+					</p:commandButton>
+
+					<p:outputLabel for="horaInicio" value="Data da Consulta:" />
+					<p:calendar id="horaInicio"
+						value="#{agendamentoMB.agendamento.data_inicio}"
+						pattern="dd/MM/yyyy HH:mm" stepMinute="15" required="true"
+						size="28" />
+					<p:outputLabel />
+
+					<p:outputLabel for="observacao" value="Observações:" />
+					<p:inputTextarea id="observacao"
+						value="#{agendamentoMB.agendamento.observacao}" required="false"
+						rows="8" cols="30" placeholder="Digite aqui..." />
+					<p:outputLabel />
+
+					<p:outputLabel />
+					<p:outputLabel />
+					<p:outputLabel />
+
+
+					<p:commandButton value="Excluir"
+						oncomplete="PF('agendaP').update();PF('dialog').hide()"
+						title="Agendamento"
+						actionListener="#{agendamentoMB.excluirRegistro(a)}"
+						rendered="#{agendamentoMB.agendamento.id_agendamento != null}"
+						update="messages agenda" icon="fa fa-times" iconPos="left" />
+
+					<p:outputLabel />
+
+
+					<p:commandButton value="Salvar"
+						oncomplete="PF('agendaP').update();PF('dialog').hide()"
+						actionListener="#{agendamentoMB.salvarRegistro}"
+						update="messages,agenda" icon="fa fa-check" iconPos="right" />
+
+
+
+				</h:panelGrid>
+
+			</p:dialog>
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

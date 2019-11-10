@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+
+
+	<ui:define name="title">Dashboard</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-12">
+
+					<p:panel>
+
+						<p:barChart model="#{relatorioMB.barModel}"
+							style="width: 60%; height: 240px;" />
+
+					</p:panel>
+				</div>
+			</div>
+
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-3">
+
+					<p:panel>
+						<p:pieChart model="#{relatorioMB.pieModel}"
+							style="width: 100%; height:300px;" />
+
+					</p:panel>
+
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3">
+					<p:panel>
+						<p:polarAreaChart model="#{relatorioMB.polarAreaModel}"
+							style="width: 100%; height: 300px;" />
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:growl id="growl" showDetail="true" />
+					<p:panel>
+						<p:barChart model="#{relatorioMB.barModel2}"
+							style="width: 100%; height: 300px;">
+							<p:ajax event="itemSelect" listener="#{relatorioMB.itemSelect}"
+								update="growl" />
+						</p:barChart>
+
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3"></div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+				<div class="ui-g-12 ui-md-6 ui-lg-4"></div>
+				<div class="ui-g-12 ui-lg-4"></div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,581 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="title">Consulta</ui:define>
+
+	<ui:define name="menu">
+
+
+	</ui:define>
+
+	<ui:define name="content">
+	
+	
+	
+
+		<h:form id="form1" target="_blank">
+
+			<p:messages showDetail="true" />
+
+			<h1 style="margin-left: 8px; font-size: 2vw">Consulta</h1>
+
+			<div class="ui-g-12 ui-md-6 ui-lg-12">
+
+				<p:panel>
+
+					<p:panelGrid layout="grid" columns="2" styleClass="ui-noborder"
+						style="width:50%">
+
+						<h:panelGrid columns="2" style="width:100%">
+
+							<pe:letterAvatar value="#{consultaMB.agendamento.paciente.nome}"
+								height="100" width="100" rounded="true" />
+
+							<p:outputPanel>
+								<h:panelGrid columns="2">
+									<h:outputText value="Prontuario:" />
+									<h:outputText
+										value="#{consultaMB.agendamento.paciente.num_prontuario.cod_prontuario}"
+										style="font-weight: bold" />
+
+									<h:outputText value="Nome:" />
+									<h:outputText value="#{consultaMB.agendamento.paciente.nome}"
+										id="nomeR" style="font-weight: bold" />
+
+									<h:outputText value="CPF:" />
+									<h:outputText value="#{consultaMB.agendamento.paciente.cpf}"
+										style="font-weight: bold" />
+
+									<h:outputText value="Data de Nascimento:" />
+									<h:outputText
+										value="#{consultaMB.agendamento.paciente.dt_nascimento}"
+										style="font-weight: bold" />
+								</h:panelGrid>
+							</p:outputPanel>
+
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="2">
+
+						</h:panelGrid>
+
+
+
+					</p:panelGrid>
+
+
+
+				</p:panel>
+
+			</div>
+
+			<p:commandButton ajax="true" value="Iniciar atendimento"
+				style="margin-top:4px;margin-bottom:4px;"
+				action="#{consultaMB.iniciarAtendimento()}"
+				widgetVar="iniAtendimento" update="form2" />
+
+
+			<p:commandButton icon="pi pi-file" iconPos="right" oncomplete="window.open('#{prontuarioMB.pagProntuario()}'); return false;"
+				value="Detalhes do prontuário " style="margin-top:4px;float:right;" action="#{prontuarioMB.buscarHistorico(consultaMB.agendamento.paciente.num_prontuario.id_prontuario)}" />
+		</h:form>
+
+		<h:form id="form2">
+			<p:growl showDetail="true" />
+			<p:growl id="growl" showDetail="true" />
+
+			<div class="ui-g-12 ui-md-6 ui-lg-12">
+
+				<p:panel id="dadosConsulta" rendered="#{consultaMB.exibir}">
+
+					<p:wizard flowListener="#{consultaMB.onFlowProcess}"
+						nextLabel="Próximo" backLabel="Voltar">
+
+						<p:tab id="anamnese" title="Anamnese">
+
+							<p:panel styleClass="ui-noborder">
+
+
+								<h:outputText value="Principal queixa do paciente:" />
+								<p:inputText value="#{consultaMB.consulta.relato_paciente}"
+									required="true" style="display: block;width:80%"
+									label="Principal queixa do paciente:" />
+
+								<h:outputText value="Detalhes da afecção:" />
+								<p:textEditor widgetVar="editorAf" 
+									value="#{consultaMB.detalhe_relato}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:panelGrid layout="grid" columns="2" cellspacing="5"
+									cellpadding="5" style="width:100%">
+
+									<h:outputText value="Temperatura:" />
+									<h:outputText value="Pressão arterial:" />
+
+									<p:inputText id="temperatura"
+										value="#{consultaMB.consulta.temperatura}" required="true"
+										style="width:70%" />
+
+									<p:inputText id="pressArterial"
+										value="#{consultaMB.consulta.pressao_arterial}"
+										required="true" style="width:70%" />
+
+									<h:outputText value="Peso:" />
+									<h:outputText value="Altura:" />
+
+									<p:inputText id="peso" value="#{consultaMB.consulta.peso}"
+										required="true" style="width:70%" />
+
+									<p:inputText id="altura" value="#{consultaMB.consulta.altura}"
+										required="true" style="width:70%" />
+
+									<h:outputText value="Cabeça:" />
+									<h:outputText value="Olhos:" />
+
+									<p:inputText value="#{consultaMB.consulta.cabeca_paciente}"
+										required="true" style="width:70%" />
+
+									<p:inputText value="#{consultaMB.consulta.olho_paciente}"
+										required="true" style="width:70%" />
+
+									<h:outputText value="Nariz:" />
+									<h:outputText value="Pele:" />
+
+									<p:inputText value="#{consultaMB.consulta.nariz_paciente}"
+										required="true" style="width:70%" />
+
+									<p:inputText value="#{consultaMB.consulta.pele_paciente}"
+										required="true" style="width:70%" />
+
+									<h:outputText value="Garganta:" />
+									<h:outputText value="Ouvidos:" />
+
+									<p:inputText value="#{consultaMB.consulta.garganta_paciente}"
+										required="true" style="width:70%" />
+
+									<p:inputText value="#{consultaMB.consulta.ouvido_paciente}"
+										required="true" style="width:70%" />
+
+								</h:panelGrid>
+
+
+								<h:outputText value="Sistema digestório:" />
+								<p:textEditor widgetVar="editorDig"
+									value="#{consultaMB.sis_dig_paciente}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Sistema cardiovascular:" />
+								<p:textEditor widgetVar="editorCardio"
+									value="#{consultaMB.sis_cardio_paciente}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Sistema respiratório:" />
+								<p:textEditor widgetVar="editorResp"
+									value="#{consultaMB.sis_resp_paciente}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Sistema genito-urinário:" />
+								<p:textEditor widgetVar="editorUri"
+									value="#{consultaMB.sis_genitoUrinario_paciente}"
+									height="150" style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Uso de medicamentos:" />
+								<p:textEditor widgetVar="editorMedicamento"
+									value="#{consultaMB.uso_medicamento}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Alergias:" />
+								<p:textEditor widgetVar="editorAlergia"
+									value="#{consultaMB.alergia}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Doença mental:" />
+								<p:selectOneMenu id="dMental" autoWidth="false"
+									value="#{consultaMB.consulta.doencaMental}"
+									style="display: block;width:50%">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItems value="#{utilMB.listdoencaMental}" />
+
+								</p:selectOneMenu>
+
+								<h:selectBooleanCheckbox value="#{pacienteMB.skip}" />
+
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="examFisico" title="Exame físico">
+							<p:panel>
+								<p:messages />
+
+
+								<h:outputText value="Exame físico geral:" />
+								<p:textEditor widgetVar="editorFisico"
+									value="#{consultaMB.exame_geral}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Aparelho respiratório:" />
+								<p:textEditor widgetVar="editorApResp"
+									value="#{consultaMB.exame_apRespiratorio}"
+									height="150" style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Pescoço e cabeça:" />
+								<p:textEditor widgetVar="editorPesc"
+									value="#{consultaMB.exame_cabecaPescoco}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Abdômen:" />
+								<p:textEditor widgetVar="editorAb"
+									value="#{consultaMB.exame_abdomen}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Sistema nervoso:" />
+								<p:textEditor widgetVar="editorNer"
+									value="#{consultaMB.exame_sistNervoso}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+								<h:outputText value="Sistema reprodutor:" />
+								<p:textEditor widgetVar="editorRepr"
+									value="#{consultaMB.exame_sistReprodutor}"
+									height="150" style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="hipDiagnostica" title="Hipóteses diagnósticas">
+							<p:panel>
+								<p:messages />
+
+								<h:outputText value="Hipótese diagnóstica:" />
+								<p:inputText value="#{consultaMB.consulta.hipotese_diagnostico}" style="display:block"/>
+
+								<h:outputText value="Detalhes:" />
+								<p:textEditor widgetVar="editorHip"
+									value="#{consultaMB.hipotese_detalhe}" height="150"
+									style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+
+
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="diagDefinitivo" title="Diagnósticos definitivos">
+							<p:panel>
+
+								<h:outputText value="Diagnóstico definitivo:" />
+								<p:inputText value="#{consultaMB.consulta.diagnostico}" style="display:block"/>
+
+								<h:outputText value="Detalhes:" />
+								<p:textEditor widgetVar="editorDef"
+									value="#{consultaMB.detalhes_diagnostico}"
+									height="150" style="margin-bottom:10px;width:100%">
+									<f:facet name="toolbar">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+										<span class="ql-formats"> <select class="ql-font"></select>
+											<select class="ql-size"></select>
+										</span>
+									</f:facet>
+								</p:textEditor>
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="tratEfetuados" title="Tratamentos efetuados">
+							<p:panel>
+
+								<p:panel>
+									<h:outputText value="Prescrição médica:" />
+									<p:textEditor widgetVar="editorPresM"
+										value="#{consultaMB.descricaoPresc}" height="150"
+										style="margin-bottom:10px;width:100%">
+										<f:facet name="toolbar">
+											<span class="ql-formats">
+												<button class="ql-bold"></button>
+												<button class="ql-italic"></button>
+												<button class="ql-underline"></button>
+												<button class="ql-strike"></button>
+											</span>
+											<span class="ql-formats"> <select class="ql-font"></select>
+												<select class="ql-size"></select>
+											</span>
+										</f:facet>
+									</p:textEditor>
+								</p:panel>
+
+								<p:panel>
+									<h:outputText value="Motivo:" />
+									<p:inputText value="#{consultaMB.motivoAtestado}" style="display:block"/>
+									
+									<h:outputText value="Detalhes:" />
+									<p:textEditor widgetVar="editorAtestado" 
+										value="#{consultaMB.detalhesMotivoAt}" height="150"
+										style="margin-bottom:10px;width:100%">
+										<f:facet name="toolbar">
+											<span class="ql-formats">
+												<button class="ql-bold"></button>
+												<button class="ql-italic"></button>
+												<button class="ql-underline"></button>
+												<button class="ql-strike"></button>
+											</span>
+											<span class="ql-formats"> <select class="ql-font"></select>
+												<select class="ql-size"></select>
+											</span>
+										</f:facet>
+									</p:textEditor>
+								</p:panel>
+							</p:panel>
+						</p:tab>
+
+
+
+						<p:tab id="confirm" title="Resumo">
+							<p:panel header="Resumo">
+								<h:panelGrid id="confirmation" columns="4"
+									columnClasses="grid,grid,grid">
+									<h:panelGrid columns="2" columnClasses="label, value">
+
+										<h:outputText value="Nº do prontuario: " />
+										<h:outputText
+											value="#{consultaMB.codprontuario}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Nome do paciente: " />
+										<h:outputText value="#{consultaMB.nome}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Data de Nascimento: " />
+										<h:outputText
+											value="#{consultaMB.dtNasc}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="CPF: " />
+										<h:outputText value="#{consultaMB.cpf}"
+											styleClass="outputLabel" />
+											
+										<h:outputText value="Telefone: " />
+										<h:outputText value="#{consultaMB.agendamento.paciente.telefone}"
+											styleClass="outputLabel" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="2" columnClasses="label, value">
+
+										<h:outputText value="Hipotese diganóstica: " />
+										<h:outputText
+											value="#{consultaMB.consulta.hipotese_diagnostico}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Diganóstico definitivo: " />
+										<h:outputText value="#{consultaMB.consulta.diagnostico}"
+											styleClass="outputLabel" />
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="2" columnClasses="label, value">
+										<h:outputText value="Prescrição: " />
+										<h:outputText value="#{consultaMB.descricaoPresc}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Atestado: " />
+										<h:outputText value="#{consultaMB.motivoAtestado}"
+											styleClass="outputLabel" />
+
+
+										<h:outputText />
+									</h:panelGrid>
+								</h:panelGrid>
+
+								<p:commandButton value="Salvar"
+									action="#{consultaMB.finalizarAtendimento()}" update="growl"
+									process="@this" />
+							</p:panel>
+						</p:tab>
+					</p:wizard>
+
+				</p:panel>
+			</div>
+
+		</h:form>
+
+
+	</ui:define>
+
+
+
+
+</ui:composition>

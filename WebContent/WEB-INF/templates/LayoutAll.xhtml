@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<title><ui:insert name="title"></ui:insert></title>
+		<title><ui:insert name="title"></ui:insert></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>ProntUni</title>
+
+	<h:outputStylesheet library="prontuni" name="styles/custom.css" />
+	<h:outputStylesheet library="prontuni" name="styles/layoutAll.css" />
+	<h:outputStylesheet library="prontuni" name="styles/components.css" />
+
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputScript target="body" library="prontuni"
+		name="javascripts/app.js" />
+	
+
+</h:head>
+
+<h:body>
+
+	<header class="aw-topbar">
+		<h:form>
+			<h:graphicImage library="prontuni" name="images/texto_prontuni.png"
+				style="width:160px; padding-top:10px;" />
+
+
+
+
+			<h:commandLink action="#{loginMB.acaoLogout}"
+				class="aw-toggle  js-toggle">
+				<i class="fa fa-fw fa-sign-out" ></i>
+			</h:commandLink>
+			
+			<h:commandLink action="#{loginMB.home}" class="aw-toggle  js-toggle">
+				<i class="fa fa-fw fa-home"></i>
+			</h:commandLink>
+
+			<h:outputLabel styleClass="aw-labelUs"
+				value="#{loginMB.usuario.pessoa.nome}" />
+
+		</h:form>
+	</header>
+
+
+	
+	<section class="aw-content  js-content">
+		<ui:insert name="content" />
+
+
+	</section>
+
+
+</h:body>
+
+</html>
