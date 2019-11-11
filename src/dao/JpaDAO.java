@@ -13,18 +13,20 @@ public abstract class JpaDAO<T> implements GenericDAO<T> {
 	private EntityManager manager = JPAUtil.getEntityManager();
 
 	/**
-	 * MÈtodo construtor que
+	 * M√©todo construtor que
 	 */
 	@SuppressWarnings("unchecked")
 	public JpaDAO() {
 		super();
 
-		// pegar a classe persistente por reflex„o
+		// pegar a classe persistente por reflex√£o
 		Type tipo = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		this.persistentClass = (Class<T>) tipo;
 
-		// pega o EntityManager padr„o da ThreadAtual
+		System.out.println("Entrou JPADAO");
+		// pega o EntityManager padr√£o da ThreadAtual
 		this.manager = JPAUtil.getEntityManager();
+		System.out.println("SAIU JPADAO");
 	}
 
 	public JpaDAO(EntityManager manager) {
