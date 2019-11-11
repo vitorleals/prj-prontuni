@@ -72,8 +72,8 @@ public class LoginMB implements Serializable {
 				return "home.jsf?faces-redirect=true";
 			}
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usu·rio sem permissıes de acesso.",
-					"Usu·rio sem permissıes de acesso."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usu√°rio sem permiss√µes de acesso.",
+					"Usu√°rio sem permiss√µes de acesso."));
 
 			return null;
 		}
@@ -84,7 +84,7 @@ public class LoginMB implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
-		// encerrar a sess„o atual
+		// encerrar a sess√£o atual
 		session.invalidate();
 
 		return "/index.jsf?faces-redirect=true";
@@ -151,8 +151,10 @@ public class LoginMB implements Serializable {
 	}
 
 	public void abrirUsuDAO() {
-
+		System.out.println("ENTROU abrirUsuDAO");
 		this.usuarioDAO = new UsuarioDAO();
+		System.out.println("SAIU abrirUsuDAO");
+		
 
 	};
 
