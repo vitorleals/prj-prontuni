@@ -22,7 +22,7 @@ public class JPAUtil {
 
 	static {
         try {
-        	fabrica = Persistence.createEntityManagerFactory("prontuni");
+        	fabrica = Persistence.createEntityManagerFactory("prontuni",properties.get());
              System.out.println("Entity Menager Test.............."+ fabrica);
         } catch (Throwable ex) {
 
@@ -33,7 +33,7 @@ public class JPAUtil {
 }
 	
 	
-	// criar a f·brica de EntityManager para o banco da aplicaÁ„o
+	// criar a f√°brica de EntityManager para o banco da aplica√ß√£o
 	//private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("prontuni");
 
 	public static EntityManager getEntityManager() {
