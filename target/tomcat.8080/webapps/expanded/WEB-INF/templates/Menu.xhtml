@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+		<nav class="aw-menu">
+			<ul>
+				<li><h:commandLink action="#{navMB.homeAtendimento()}"
+						rendered="#{loginMB.tipoUsuario == 'ATENDIMENTO'}">
+						<i class="fa  fa-fw  fa-home"></i>Home</h:commandLink> <h:commandLink
+						action="#{navMB.homeEspecialista()}"
+						rendered="#{loginMB.tipoUsuario == 'ESPECIALISTA'}">
+						<i class="fa  fa-fw  fa-home"></i>Home</h:commandLink> <h:commandLink
+						action="#{navMB.homeAdministrador()}"
+						rendered="#{loginMB.tipoUsuario == 'ADMIN'}">
+						<i class="fa  fa-fw  fa-home"></i>Home</h:commandLink></li>
+
+				<li><h:commandLink action="#{navMB.paginaListaAgendamento()}">
+						<i class="fa  fa-fw  fa-calendar"></i>Agendamento</h:commandLink></li>
+
+				<li><h:commandLink action="#{navMB.listarConsultas()}"
+						rendered="#{loginMB.tipoUsuario == 'ESPECIALISTA'}">
+						<i class="fa  fa-fw  fa-file"></i>Consultas</h:commandLink></li>
+
+
+				<li><h:commandLink action="#{navMB.acaoListarPaciente()}">
+						<i class="fa  fa-fw  fa-user"></i>Pacientes</h:commandLink></li>
+
+
+				<li><h:commandLink action="#{navMB.paginaDashboard()}"
+						rendered="#{loginMB.tipoUsuario == 'ADMIN'}">
+						<i class="fa  fa-fw  fa-dashboard"></i>Relatórios</h:commandLink></li>
+
+				<li><h:commandLink action="#{navMB.paginaMinhaConta}">
+						<i class="fa  fa-fw  fa-user"></i>Minha conta</h:commandLink></li>
+
+			</ul>
+
+		</nav>
+	</h:form>
+
+
+</ui:composition>

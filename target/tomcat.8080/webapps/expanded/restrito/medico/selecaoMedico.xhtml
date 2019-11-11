@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/LayoutLogin.xhtml">
+
+	<ui:define name="title">Médico</ui:define>
+	
+	<ui:define name="content" >
+
+
+		<h:form style="padding:20px;">
+			<div style="padding-top: 20px; margin-bottom: 20px">
+				<p:inputText id="nome" size="40" value="#{selecaoMedicoMB.nome}"
+					placeholder="Nome do Médico(a)" />
+
+				<p:spacer width="10px" />
+
+				<p:commandButton value="Pesquisar"
+					action="#{selecaoMedicoMB.pesquisar}" update="@form" />
+		
+			</div>
+
+			<p:dataTable value="#{selecaoMedicoMB.medicosFiltrados}"
+				var="medico" emptyMessage="Nenhum médico(a) encontrado." rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código"
+					style="text-align: center; width: 50px">
+					<h:outputText value="#{medico.id_pessoa}" />
+				</p:column>
+				<p:column headerText="Nome"
+				style="text-align: center;">
+					<h:outputText value="#{medico.nome}" />
+				</p:column>
+				
+				<p:column headerText="CPF"
+				style="text-align: center;">
+					<h:outputText value="#{medico.cpf}" />
+				</p:column>
+				
+				<p:column headerText="CRM"
+				style="text-align: center;">
+					<h:outputText value="#{medico.crm}" />
+				</p:column>
+				<p:column style="width: 30px; text-align: center">
+					<p:commandButton icon="ui-icon-check" title="Selecionar"
+						action="#{selecaoMedicoMB.selecionar(medico)}" process="@this" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

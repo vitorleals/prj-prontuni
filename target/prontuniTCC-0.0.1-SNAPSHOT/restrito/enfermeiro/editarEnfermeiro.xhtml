@@ -1,0 +1,228 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form>
+			<!-- Growl para exibir as mensagens na tela -->
+			<p:growl id="growl" sticky="true" showDetail="true" />
+
+
+			<p:panel header="CADASTRO DE ENFERMEIRO">
+
+
+				<p:panel header="Dados Pessoais" toggleable="true">
+
+					<p:panelGrid columns="2" layout="grid" styleClass="ui-noborder">
+
+						<p:panelGrid columns="1" layout="grid" style="width:100%;"
+							styleClass="ui-noborder">
+
+							<h:outputLabel for="nome" value="Nome: *" />
+
+
+							<p:inputText id="nome" value="#{enfermeiroMB.enfermeiro.nome}"
+								style="width:100%" required="true" />
+
+
+
+							<h:panelGrid columns="2" layout="grid" style="width:100%">
+
+								<h:outputLabel for="cpf" value="CPF: *" />
+
+								<h:outputLabel for="rg" value="RG: " />
+
+								<p:inputMask id="cpf" value="#{enfermeiroMB.enfermeiro.cpf}"
+									required="true" mask="999.999.999-99" style="width:90%" />
+
+								<p:inputMask id="rg" value="#{enfermeiroMB.enfermeiro.rg}"
+									required="true" mask="99.999.999-9" style="width:100%" />
+
+								<h:outputLabel for="dtNasc" value="Data de Nascimento: " />
+
+								<h:outputLabel for="sexo" value="Sexo:" />
+
+								<p:inputMask id="dtNasc"
+									value="#{enfermeiroMB.enfermeiro.dt_nascimento}"
+									mask="99/99/9999" required="true" />
+
+
+								<p:selectOneButton id="sexo"
+									value="#{enfermeiroMB.enfermeiro.sexo}">
+									<f:selectItem itemLabel="Feminino" itemValue="F" />
+									<f:selectItem itemLabel="Masculino" itemValue="M" />
+								</p:selectOneButton>
+
+
+								<p:outputLabel for="estadoCivil" value="Estado Civil:" />
+								<h:outputLabel for="filhos" value="Possui filhos?:" />
+
+								<p:selectOneMenu id="estadoCivil"
+									value="#{enfermeiroMB.enfermeiro.estado_civil}"
+									style="width:50%">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
+									<f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
+									<f:selectItem itemLabel="Divorciado(a)"
+										itemValue="Divorciado(a)" />
+									<f:selectItem itemLabel="Viúvo(a)" itemValue="Viúvo(a)" />
+								</p:selectOneMenu>
+
+								<p:selectOneMenu id="filhos"
+									value="#{enfermeiroMB.enfermeiro.filhos}" style="width:50%">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItem itemLabel="0" itemValue="0" />
+									<f:selectItem itemLabel="1" itemValue="1" />
+									<f:selectItem itemLabel="2" itemValue="2" />
+									<f:selectItem itemLabel="3" itemValue="3" />
+									<f:selectItem itemLabel="4" itemValue="4" />
+								</p:selectOneMenu>
+
+
+							</h:panelGrid>
+
+							<h:outputLabel value="Filiação:" />
+
+
+							<h:outputLabel for="nomeMae" value="Nome da mãe: " />
+
+
+							<p:inputText id="nomeMae" value="#{enfermeiroMB.enfermeiro.mae}"
+								style="width:100%" required="true" />
+
+
+							<h:outputLabel for="nomePai" value="Nome do pai: " />
+
+
+							<p:inputText id="nomePai" value="#{enfermeiroMB.enfermeiro.pai}"
+								style="width:100%" required="true" />
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="1" layout="grid" style="width:100%;"
+							styleClass="ui-noborder">
+
+							<p:panelGrid columns="2" layout="grid" style="width:100%;"
+								styleClass="ui-noborder">
+								<p:outputLabel for="rua" value="Rua:" />
+								<p:outputLabel for="casa" value="Nº Casa:" />
+
+								<p:inputText id="rua" value="#{enfermeiroMB.enfermeiro.rua}"
+									style="width:100%" />
+								<p:inputText id="casa" value="#{enfermeiroMB.enfermeiro.casa}"
+									style="width:15%" />
+
+								<p:outputLabel for="bairro" value="Bairro:" />
+								<p:outputLabel for="cidade" value="Cidade:" />
+
+								<p:inputText id="bairro"
+									value="#{enfermeiroMB.enfermeiro.bairro}" style="width:100%" />
+								<p:inputText id="cidade"
+									value="#{enfermeiroMB.enfermeiro.cidade}" style="width:100%" />
+
+								<p:outputLabel for="uf" value="UF:" />
+								<p:outputLabel for="cep" value="CEP:" />
+
+								<p:selectOneMenu id="uf"
+									value="#{enfermeiroMB.enfermeiro.estado}" style="width:80%">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItems value="#{utilMB.listUf}" />
+								</p:selectOneMenu>
+
+								<p:inputMask id="cep" value="#{enfermeiroMB.enfermeiro.cep}"
+									mask="99999-999" />
+
+								<br />
+
+								<h:outputLabel value="Contato:" />
+								<h:outputLabel value="" />
+
+								<p:outputLabel for="tel" value="Telefone:" />
+
+								<p:outputLabel for="cel" value="Celular:" />
+
+								<p:inputMask id="tel"
+									value="#{enfermeiroMB.enfermeiro.telefone}"
+									mask="(99) 99999-9999" style="width:100%" />
+								<p:inputMask id="cel" value="#{enfermeiroMB.enfermeiro.celular}"
+									mask="(99) 9999-9999" style="width:100%" />
+
+
+								<p:outputLabel for="email" value="E-mail:" />
+								<h:outputLabel value="" />
+
+								<p:inputText id="email" value="#{enfermeiroMB.enfermeiro.email}"
+									style="width:100%">
+									<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+								</p:inputText>
+
+							</p:panelGrid>
+
+
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<br />
+
+				<p:panel header="Dados Profissionais" toggleable="true">
+
+					<p:panelGrid columns="2" layout="grid" styleClass="ui-noborder">
+
+						<p:outputLabel value="Área de atuação:" />
+						<p:outputLabel value="" />
+
+						<p:selectOneMenu id="atuacao"
+							value="#{enfermeiroMB.enfermeiro.areaAtuacao}" style="width:50%">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{utilMB.listAreaAtuacao}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="" />
+
+						<h:panelGrid columns="2">
+							<p:outputLabel for="coren" value="COREN:" />
+							<p:outputLabel for="ufCoren" value="UF:" />
+
+							<p:inputText id="coren" />
+							<p:selectOneMenu id="ufCoren"
+								value="#{enfermeiroMB.enfermeiro.uf_coren}" style="width:100%">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItems value="#{utilMB.listUf}" />
+							</p:selectOneMenu>
+
+
+
+
+						</h:panelGrid>
+
+
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<br />
+
+				<p:commandButton icon="fa fa-fw fa-close" value="Cancelar"
+					action="#{medicoMB.acaoCancelar}" update="growl" />
+
+
+
+				<p:commandButton icon="fa fa-fw fa-save" value="Salvar"
+					action="#{medicoMB.acaoSalvar}" update="growl" />
+
+			</p:panel>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

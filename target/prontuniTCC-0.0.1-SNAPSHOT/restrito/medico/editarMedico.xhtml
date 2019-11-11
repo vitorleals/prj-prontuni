@@ -1,0 +1,272 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+<ui:define name="title">Médico</ui:define>
+
+	<ui:define name="content">
+
+
+		<h:form>
+
+			<p:growl id="growl" sticky="true" showDetail="false" />
+
+			<h1 style="margin-left: 8px; font-size: 2vw">Médico</h1>
+
+			<p:panel header="Novo Médico">
+			
+				<p:panel header="Dados Pessoais" toggleable="true">
+
+					<p:panelGrid columns="2" layout="grid" styleClass="ui-noborder">
+
+						<p:panelGrid columns="1" layout="grid" style="width:100%;"
+							styleClass="ui-noborder">
+
+							<h:outputLabel for="nome" value="Nome: *" />
+
+
+							<p:inputText id="nome" value="#{medicoMB.medico.nome}"
+								style="width:100%" required="true"
+								requiredMessage="Campo nome é obrigatório" />
+
+
+
+							<h:panelGrid columns="2" layout="grid" style="width:100%">
+
+								<h:outputLabel for="cpf" value="CPF: *" />
+
+								<h:outputLabel for="rg" value="RG: " />
+
+								<p:inputMask id="cpf" value="#{medicoMB.medico.cpf}"
+									requiredMessage="Campo CPF é obrigatório" required="true"
+									mask="999.999.999-99" style="width:90%" />
+
+								<p:inputMask id="rg" value="#{medicoMB.medico.rg}"
+									requiredMessage="Campo RG é obrigatório" required="true"
+									mask="99.999.999-9" style="width:100%" />
+
+								<h:outputLabel for="dtNasc" value="Data de Nascimento: " />
+
+								<h:outputLabel for="sexo" value="Sexo:" />
+
+								<p:inputMask id="dtNasc"
+									value="#{medicoMB.medico.dt_nascimento}" mask="99/99/9999"
+									requiredMessage="Campo Data de Nascimento é obrigatório"
+									required="true" />
+
+
+								<p:selectOneButton id="sexo" value="#{medicoMB.medico.sexo}"
+									required="true" requiredMessage="Campo Sexo é obrigatório">
+									<f:selectItem itemLabel="Feminino" itemValue="F" />
+									<f:selectItem itemLabel="Masculino" itemValue="M" />
+								</p:selectOneButton>
+
+
+								<p:outputLabel for="estadoCivil" value="Estado Civil:" />
+								<h:outputLabel for="filhos" value="Possui filhos?:" />
+
+								<p:selectOneMenu id="estadoCivil"
+									value="#{medicoMB.medico.estado_civil}" style="width:50%"
+									required="true"
+									requiredMessage="Campo Estado civil é obrigatório">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
+									<f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
+									<f:selectItem itemLabel="Divorciado(a)"
+										itemValue="Divorciado(a)" />
+									<f:selectItem itemLabel="Viúvo(a)" itemValue="Viúvo(a)" />
+								</p:selectOneMenu>
+
+								<p:selectOneMenu id="filhos" value="#{medicoMB.medico.filhos}"
+									style="width:50%" required="true"
+									requiredMessage="Campo Filhos é obrigatório">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItem itemLabel="0" itemValue="0" />
+									<f:selectItem itemLabel="1" itemValue="1" />
+									<f:selectItem itemLabel="2" itemValue="2" />
+									<f:selectItem itemLabel="3" itemValue="3" />
+									<f:selectItem itemLabel="4" itemValue="4" />
+								</p:selectOneMenu>
+
+								<h:outputLabel for="nacionalidade" value="Nacionalidade:" />
+
+								<h:outputLabel for="naturalidade" value="Naturalidade: " />
+
+								<p:inputText id="nacionalidade"
+									value="#{medicoMB.medico.nacionalidade}"
+									requiredMessage="Campo Nacionalidade é obrigatório"
+									required="true" style="width:90%" />
+
+								<p:inputText id="naturalidade"
+									value="#{medicoMB.medico.naturalidade}"
+									requiredMessage="Campo Naturalidade é obrigatório"
+									required="true" style="width:90%" />
+
+
+							</h:panelGrid>
+
+							<h:outputLabel value="Filiação:" />
+
+
+							<h:outputLabel for="nomeMae" value="Nome da mãe: " />
+
+
+							<p:inputText id="nomeMae" value="#{medicoMB.medico.mae}"
+								style="width:100%" required="true"
+								requiredMessage="Campo Nome da mãe é obrigatório" />
+
+
+							<h:outputLabel for="nomePai" value="Nome do pai: " />
+
+
+							<p:inputText id="nomePai" value="#{medicoMB.medico.pai}"
+								style="width:100%" required="true"
+								requiredMessage="Campo Nome do pai é obrigatório" />
+
+						</p:panelGrid>
+
+						<p:panelGrid columns="1" layout="grid" style="width:100%;"
+							styleClass="ui-noborder">
+
+							<p:panelGrid columns="2" layout="grid" style="width:100%;"
+								styleClass="ui-noborder">
+								<p:outputLabel for="rua" value="Rua:" />
+								<p:outputLabel for="casa" value="Nº Casa:" />
+
+								<p:inputText id="rua" value="#{medicoMB.medico.rua}"
+									style="width:100%" />
+								<p:inputText id="casa" value="#{medicoMB.medico.casa}"
+									style="width:15%" />
+
+								<p:outputLabel for="bairro" value="Bairro:" />
+								<p:outputLabel for="cidade" value="Cidade:" />
+
+								<p:inputText id="bairro" value="#{medicoMB.medico.bairro}"
+									style="width:100%" />
+								<p:inputText id="cidade" value="#{medicoMB.medico.cidade}"
+									style="width:100%" />
+
+								<p:outputLabel for="uf" value="UF:" />
+								<p:outputLabel for="cep" value="CEP:" />
+
+								<p:selectOneMenu id="uf" value="#{medicoMB.medico.estado}"
+									style="width:80%">
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItems value="#{utilMB.listUf}" />
+								</p:selectOneMenu>
+
+								<p:inputMask id="cep" value="#{medicoMB.medico.cep}"
+									mask="99999-999" />
+								<h:outputLabel value="" />
+
+								<br />
+
+								<h:outputLabel value="Contato:" />
+								<h:outputLabel value="" />
+
+								<p:outputLabel for="tel" value="Telefone:" />
+
+								<p:outputLabel for="cel" value="Celular:" />
+
+								<p:inputMask id="tel" value="#{medicoMB.medico.telefone}"
+									mask="(99) 99999-9999" style="width:100%" />
+								<p:inputMask id="cel" value="#{medicoMB.medico.celular}"
+									mask="(99) 9999-9999" style="width:100%" />
+
+
+								<p:outputLabel for="email" value="E-mail:" />
+								<h:outputLabel value="" />
+
+								<p:inputText id="email" value="#{medicoMB.medico.email}"
+									style="width:100%">
+									<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+								</p:inputText>
+
+							</p:panelGrid>
+
+
+						</p:panelGrid>
+
+					</p:panelGrid>
+				</p:panel>
+
+				<br />
+
+				<p:panel header="Dados Profissionais" toggleable="true">
+
+					<p:panelGrid columns="2" layout="grid" styleClass="ui-noborder">
+
+						<p:outputLabel value="Área de atuação:" />
+						<p:outputLabel value="" />
+
+						<p:selectOneMenu id="atuacao"
+							value="#{medicoMB.medico.areaAtuacao}" style="width:50%"
+							required="true"
+							requiredMessage="Campo Area de atuação é obrigatório">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{utilMB.listAreaAtuacao}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="" />
+
+						<p:outputLabel value="Especialidade:" />
+						<p:outputLabel value="" />
+
+						<p:selectOneMenu id="especialidade"
+							value="#{medicoMB.medico.especialidade}" style="width:50%"
+							required="true"
+							requiredMessage="Campo Especialidade é obrigatório">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{utilMB.listEspecialidades}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="" />
+
+						<h:panelGrid columns="2">
+							<p:outputLabel value="CRM:" />
+							<p:outputLabel value="UF:" />
+
+							<p:inputText id="crm" required="true"
+								value="#{medicoMB.medico.crm}"
+								requiredMessage="Campo CRM é obrigatório"
+								title="CRM médico é o número de registro do profissional de medicina no Conselho Regional de Medicina" />
+							<p:selectOneMenu id="estado" value="#{medicoMB.medico.uf_crm}"
+								style="width:100%" required="true"
+								requiredMessage="Campo Estado(CRM) é obrigatório">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItems value="#{utilMB.listUf}" />
+							</p:selectOneMenu>
+
+							<p:tooltip id="toolTipCRM" for="crm" showEvent="focus"
+								hideEvent="blur" />
+
+
+						</h:panelGrid>
+
+
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<br />
+
+				<p:commandButton icon="fa fa-fw fa-close" value="Cancelar"
+					action="#{medicoMB.acaoCancelar}" update="growl" />
+
+
+
+				<p:commandButton icon="fa fa-fw fa-save" value="Salvar"
+					action="#{medicoMB.acaoSalvar}" update="growl" />
+
+
+
+			</p:panel>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

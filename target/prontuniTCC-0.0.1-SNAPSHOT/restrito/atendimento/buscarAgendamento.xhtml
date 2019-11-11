@@ -1,0 +1,169 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="title">Agendamento</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+
+			<p:growl id="messages" />
+			
+			<h1 style="margin-left: 8px; font-size: 2vw">Agendamento</h1>
+			
+
+			<div class="ui-g-12 ui-md-12">
+
+				<p:commandButton action="#{navMB.homeAtendimento()}" value="Home"
+					icon="pi pi-home" />
+
+				<p:commandButton value="Novo agendamento"
+					action="#{navMB.agendarConsulta()}" />
+
+				<br />
+
+				<p:panel header="Filtrar agendamentos:" style="margin-top:10px;">
+
+					<div class="ui-inputgroup" style="width: 100%;">
+						<p:inputText placeholder="Pesquisar agendamentos..."
+							style="width:100%; height:2vw" />
+						<p:commandButton icon="pi pi-search" value="Pesquisar"
+							styleClass="white-button" />
+					</div>
+
+				</p:panel>
+			</div>
+
+			<div class="ui-g-12 ui-md-12">
+
+				<p:panel id="panelTable" header="Lista de agendamentos:">
+
+					<p:dataTable id="tblAgendamentos" var="agend"
+						widgetVar="agendTable" value="#{agendamentoMB.listaAgenda}"
+						emptyMessage="Nenhum registro encontrado.">
+
+
+						<p:column headerText="Paciente" sortBy="#{agend.paciente.nome}">
+							<h:outputText value="#{agend.paciente.nome}" />
+						</p:column>
+
+						<p:column headerText="Médico" sortBy="#{agend.medico.nome}">
+							<h:outputText value="#{agend.medico.nome}" />
+						</p:column>
+
+						<p:column headerText="Data" sortBy="#{agend.data_inicio}">
+							<h:outputText value="#{agend.data_inicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy " timeZone="GMT-03:00" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Hora" sortBy="#{agend.data_inicio}">
+							<h:outputText value="#{agend.data_inicio}">
+								<f:convertDateTime pattern="HH:mm " timeZone="GMT-03:00" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Tipo" sortBy="#{agend.tipo}">
+							<h:outputText value="#{agend.tipo}" />
+						</p:column>
+
+						<p:column headerText="Status" sortBy="#{agend.status_agendamento}">
+							<h:outputText value="#{agend.status_agendamento}" />
+						</p:column>
+
+						<p:column headerText="Unidade"
+							sortBy="#{agend.unidade.nome_unidade}">
+							<h:outputText value="#{agend.unidade.nome_unidade}" />
+						</p:column>
+
+						<p:column style="width:32px;text-align: center">
+							<p:commandButton id="btnDetalhe" update=":form:agDetail"
+								oncomplete="PF('agDialog').show()" icon="pi pi-search"
+								title="View">
+								<f:setPropertyActionListener value="#{agend}"
+									target="#{agendamentoMB.agSelecionado}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+
+				</p:panel>
+			</div>
+
+			<p:dialog id="dialogDetalhe" header="Agendamento Info"
+				widgetVar="agDialog" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="agDetail" style="text-align:center;">
+					<p:panelGrid columns="2" columnClasses="label,value">
+						<f:facet name="header">
+							<pe:letterAvatar
+								value="#{agendamentoMB.agSelecionado.paciente.nome}"
+								rounded="true" />
+						</f:facet>
+
+						<h:outputText value="Paciente:" />
+						<h:outputText value="#{agendamentoMB.agSelecionado.paciente.nome}" />
+
+						<h:outputText value="Médico:" />
+						<h:outputText value="#{agendamentoMB.agSelecionado.medico.nome}" />
+
+						<h:outputText value="Data e hora:" />
+						<h:outputText value="#{agendamentoMB.agSelecionado.data_inicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm "
+								timeZone="GMT-03:00" />
+						</h:outputText>
+
+						<h:outputText value="Status:" />
+						<h:outputText
+							value="#{agendamentoMB.agSelecionado.status_agendamento}" />
+
+						<h:outputText value="Tipo:" />
+						<h:outputText value="#{agendamentoMB.agSelecionado.tipo}" />
+
+						<h:outputText value="Observação:" />
+						<p:inputTextarea value="#{agendamentoMB.agSelecionado.observacao}"
+							autoResize="false" readonly="true" />
+
+					</p:panelGrid>
+
+					<p:commandButton value="Excluir agendamento"
+						style="margin-top:5px;"
+						action="#{agendamentoMB.acaoExcluir(agendamentoMB.agSelecionado.id_agendamento)}"
+						update="panelTable messages">
+
+						<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							onclick="PF('agDialog').hide()" update="panelTable messages"
+							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+					</p:confirmDialog>
+
+					<p:commandButton
+						rendered="#{loginMB.tipoUsuario == 'ESPECIALISTA' and agendamentoMB.agSelecionado.status_agendamento == 'AGUARDANDO ATENDIMENTO'}"
+						value="Realizar atendimento" style="margin-top:5px;"
+						action="#{consultaMB.realizarConsulta(agendamentoMB.agSelecionado.id_agendamento)}" />
+				</p:outputPanel>
+			</p:dialog>
+
+
+
+
+
+
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

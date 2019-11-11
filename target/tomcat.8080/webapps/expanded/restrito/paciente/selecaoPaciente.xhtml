@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/LayoutLogin.xhtml">
+	
+	<ui:define name="title">Paciente</ui:define>
+
+	<ui:define name="content">
+
+
+		<h:form style="padding: 20px;">
+			<div style="padding-top: 20px; margin-bottom: 20px">
+				<p:inputText id="nome" size="40" value="#{selecaoPacienteMB.nome}"
+					placeholder="Nome do Paciente" />
+
+				<p:spacer width="10px" />
+
+				<p:commandButton value="Pesquisar"
+					action="#{selecaoPacienteMB.pesquisar}" update="@form" />
+
+				<p:commandButton value="Novo Paciente"
+					action="#{pacienteMB.acaoCadastroPaciente}" />
+			</div>
+
+			<p:dataTable value="#{selecaoPacienteMB.pacientesFiltrados}"
+				var="paciente" emptyMessage="Nenhum paciente encontrado." rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código"
+					style="text-align: center; width: 50px">
+					<h:outputText value="#{paciente.id_pessoa}" />
+				</p:column>
+				<p:column headerText="Nome" style="text-align: center;">
+					<h:outputText value="#{paciente.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF" style="text-align: center;">
+					<h:outputText value="#{paciente.cpf}" />
+				</p:column>
+
+				<p:column headerText="Data de Nascimento"
+					style="text-align: center;">
+					<h:outputText value="#{paciente.dt_nascimento}" />
+				</p:column>
+				<p:column style="width: 30px; text-align: center">
+					<p:commandButton icon="ui-icon-check" title="Selecionar"
+						action="#{selecaoPacienteMB.selecionar(paciente)}" process="@this" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

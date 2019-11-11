@@ -1,0 +1,200 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+
+
+	<ui:define name="title">Paciente</ui:define>
+
+	<ui:define name="content">
+		<h:outputStylesheet library="prontuni"
+			name="styles/componentWizard.css" />
+
+		<h:form>
+
+			<div class="ui-g-12 ui-md-12">
+
+				<p:commandButton onclick="javascript:history.back(1)" value="Voltar"
+					icon="pi pi-arrow-left" />
+
+				<p:panel style="margin-top:10px;font-size:30px !important;"
+					header="CADASTRO DE PACIENTE">
+
+					<p:growl id="growl" sticky="true" showDetail="true" />
+
+					<p:wizard flowListener="#{pacienteMB.onFlowProcess}"
+						nextLabel="Próximo" backLabel="Voltar">
+						<p:tab id="pessoal" title="Pessoal">
+							<p:panel header="Dados Pessoais">
+								<p:messages />
+								<h:panelGrid columns="2" columnClasses="label, value">
+
+									<p:outputText value="Nº ID:"/>
+									<h:inputHidden id="codigo"
+										value="#{pacienteMB.paciente.id_pessoa}" />
+
+									<p:outputLabel for="nomeP" value="Nome:" />
+									<p:inputText id="nomeP" value="#{pacienteMB.paciente.nome}"
+										required="true" label="Nome:" />
+
+									<p:outputLabel for="cpf" value="CPF:" />
+									<p:inputMask id="cpf" value="#{pacienteMB.paciente.cpf}" required="true"
+										mask="999.999.999-99">
+									</p:inputMask>
+
+									<p:outputLabel for="rg" value="RG:" />
+									<p:inputMask id="rg" value="#{pacienteMB.paciente.rg}" required="true"
+										mask="99.999.999-9" />
+
+									<p:outputLabel for="dtNasc" value="Data de Nascimento: " />
+									<p:inputMask id="dtNasc" value="#{pacienteMB.paciente.dt_nascimento}"
+										required="true" mask="99/99/9999" />
+
+									<p:outputLabel for="sexo" value="Sexo:" />
+									<p:selectOneButton id="sexo" value="#{pacienteMB.paciente.sexo}">
+										<f:selectItem itemLabel="Feminino" itemValue="F" />
+										<f:selectItem itemLabel="Masculino" itemValue="M" />
+									</p:selectOneButton>
+									
+									<p:outputLabel for="tpSanguineo" value="Tipo sanguineo:" />
+									<p:inputText id="tpSanguineo" value="#{pacienteMB.paciente.tipo_sanguineo}"
+										required="true" label="Tipo:" />
+
+									<h3>Filiação</h3>
+									<h:outputLabel />
+
+									<p:outputLabel for="mae" value="Nome da mãe: " />
+									<p:inputText id="mae" value="#{pacienteMB.paciente.mae}" required="true"
+										label="Nome:" />
+
+
+									<p:outputLabel for="pai" value="Nome do pai: " />
+									<p:inputText id="pai" value="#{pacienteMB.paciente.pai}" required="true"
+										label="Nome:" />
+
+
+								</h:panelGrid>
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="endereco" title="Endereco">
+							<p:panel header="Dados do endereço">
+								<p:messages />
+								<h:panelGrid columns="2" columnClasses="label, value">
+									<p:outputLabel for="casa" value="Nº casa: " />
+									<p:inputText id="casa" value="#{pacienteMB.paciente.casa}" />
+
+									<p:outputLabel for="rua" value="Rua: " />
+									<p:inputText id="rua" value="#{pacienteMB.paciente.rua}" />
+
+									<p:outputLabel for="cep" value="CEP: " />
+									<p:inputText id="cep" value="#{pacienteMB.paciente.cep}" />
+
+									<p:outputLabel for="cidade" value="Cidade: " />
+									<p:inputText id="cidade" value="#{pacienteMB.paciente.cidade}" />
+
+									<p:outputLabel for="estado" value="Estado: " />
+									<p:selectOneMenu id="estado"
+										value="#{pacienteMB.paciente.estado}" style="width:125px">
+										<f:selectItem itemLabel="Selecione" itemValue="" />
+										<f:selectItems value="#{utilMB.listUf}" />
+
+									</p:selectOneMenu>
+
+									<p:outputLabel for="nat" value="Naturalidade: " />
+									<p:inputText id="nat" value="#{pacienteMB.paciente.naturalidade}" />
+									
+									<p:outputLabel for="nac" value="Nacionalidade: " />
+									<p:inputText id="nac" value="#{pacienteMB.paciente.nacionalidade}" />
+									
+
+
+								</h:panelGrid>
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="contato" title="Contato">
+							<p:panel header="Informações para contato">
+								<p:messages />
+								<h:panelGrid columns="2" columnClasses="label, value">
+									<h:outputText value="Email:" />
+									<p:inputText value="#{pacienteMB.paciente.email}"
+										required="true" label="Email" />
+
+									<h:outputText value="Telefone:" />
+									<p:inputMask value="#{pacienteMB.paciente.telefone}"
+										mask="99 9999-9999" />
+
+									<h:outputText value="Celular:" />
+									<p:inputMask value="#{pacienteMB.paciente.celular}"
+										mask="(99) 99999-9999" />
+
+								</h:panelGrid>
+							</p:panel>
+						</p:tab>
+
+						<p:tab id="confirm" title="Resumo">
+							<p:panel header="Resumo">
+								<h:panelGrid id="confirmation" columns="3"
+									columnClasses="grid,grid,grid">
+									<h:panelGrid columns="2" columnClasses="label, value">
+										<h:outputText value="Nome: " />
+										<h:outputText value="#{pacienteMB.paciente.nome}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="CPF: " />
+										<h:outputText value="#{pacienteMB.paciente.cpf}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Data de Nascimento: " />
+										<h:outputText value="#{pacienteMB.paciente.dt_nascimento}"
+											styleClass="outputLabel" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="2" columnClasses="label, value">
+										<h:outputText value="Rua: " />
+										<h:outputText value="#{pacienteMB.paciente.rua}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Nº Casa: " />
+										<h:outputText value="#{pacienteMB.paciente.casa}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Cidade: " />
+										<h:outputText value="#{pacienteMB.paciente.cidade}"
+											styleClass="outputLabel" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="2" columnClasses="label, value">
+										<h:outputText value="Email: " />
+										<h:outputText value="#{pacienteMB.paciente.email}"
+											styleClass="outputLabel" />
+
+										<h:outputText value="Telefone: " />
+										<h:outputText value="#{pacienteMB.paciente.telefone}"
+											styleClass="outputLabel" />
+
+
+										<h:outputText />
+									</h:panelGrid>
+								</h:panelGrid>
+
+								<p:commandButton value="Salvar"
+									action="#{pacienteMB.salvarPaciente}" update="growl"
+									process="@this" />
+							</p:panel>
+						</p:tab>
+					</p:wizard>
+
+				</p:panel>
+
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

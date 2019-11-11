@@ -1,0 +1,139 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+
+
+<ui:define name="title">Paciente</ui:define>
+
+	<ui:define name="content">
+
+		<style type="text/css">
+/*demo*/
+.ui-dataview-list .ui-dataview-row {
+	border-bottom: 1px solid #A8A8A8;
+	padding: 25px 10px;
+	/* with the exported variables from Nova and Luna Themes*/
+	border-bottom-color: var(- -input-border-color, #A8A8A8);
+}
+
+.logo {
+	width: 5%;
+}
+
+.detail {
+	width: 85%;
+	padding-left: 25px;
+}
+</style>
+
+		<h:form id="form">
+
+
+			<p:growl id="messages" showDetail="true" />
+
+			<div class="ui-g-12 ui-md-12">
+				<p:commandButton onclick="javascript:history.back(1)" value="Voltar"
+					icon="pi pi-arrow-left" />
+
+				<p:commandButton value="Novo Paciente" icon="pi pi-user-plus"
+					action="#{pacienteMB.acaoCadastroPaciente()}" />
+
+				<p:panel header="Filtrar pacientes:" style="margin-top:10px;">
+
+					<div class="ui-inputgroup" style="width: 100%;">
+						<p:inputText id="nome" placeholder="Pesquisar pacientes..."
+							value="#{pacienteMB.nome}" style="width:100%; height:2vw" />
+						<p:commandButton value="Pesquisar"
+							action="#{pacienteMB.pesquisar}" update="@form"
+							style="float:right; margin-right:20px;" icon="pi pi-search"
+							styleClass="white-button" />
+					</div>
+
+				</p:panel>
+			</div>
+
+			<br />
+
+			<div class="ui-g-12 ui-md-12">
+			
+				
+
+				<p:panel id="panelTable" header="Lista de pacientes:">
+
+					<p:dataTable id="dataTable" var="paciente" rowHover="true"
+						style="text-align:center;"
+						value="#{pacienteMB.listPacientes}" reflow="true"
+						rows="10" paginator="true"
+						emptyMessage="Nenhum paciente encontrado." lazy="true">
+
+
+						<p:column headerText="Prontuário">
+							<h:outputText value="#{paciente.num_prontuario.cod_prontuario}" />
+						</p:column>
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{paciente.nome}" />
+						</p:column>
+
+						<p:column headerText="CPF">
+							<h:outputText value="#{paciente.cpf}" />
+						</p:column>
+
+						<p:column headerText="RG">
+							<h:outputText value="#{paciente.rg}" />
+						</p:column>
+						<p:column headerText="Data de nascimento">
+							<h:outputText value="#{paciente.dt_nascimento}" />
+						</p:column>
+						<p:column headerText="Ultima consulta">
+						</p:column>
+
+
+						<p:column headerText="Ações">
+							<p:commandLink
+								action="#{pacienteMB.acaoExcluir(paciente.id_pessoa)}"
+								update="dataTable">
+								<i class="fa fa-trash fa-2x"></i>
+								<p:confirm header="Confirmação"
+									message="Deseja mesmo excluir o(a) paciente #{paciente.nome}?"
+									icon="pi pi-exclamation-triangle" />
+							</p:commandLink>
+							
+							
+
+							<p:commandLink
+								action="#{pacienteMB.acaoAbrirAlteracao(paciente.id_pessoa)}">
+								<i class="fa fa-edit fa-2x"></i>
+							</p:commandLink>
+
+
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+			</div>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				
+					<p:commandButton value="Sim" type="button" update="messages"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				
+			</p:confirmDialog>
+
+
+
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="title">Novo agendamento</ui:define>
+
+	<ui:define name="content">
+
+
+		<h:form>
+
+			<p:growl id="msgs" life="2000" />
+			<p:commandButton action="#{navMB.homeAtendimento()}" value="Home"
+				icon="pi pi-home" />
+
+			<p:fieldset legend="Novo Atendimento">
+				<h:panelGrid columns="1" cellpadding="10" cellspacing="5"
+					style=" width:100%;">
+
+					<p:panel header="Selecione a unidade: ">
+						<h:panelGrid columns="3" cellpadding="5">
+							<h:outputLabel value="Unidade:" for="unidade" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+
+							<p:inputText id="unidade" required="true"
+								value="#{agendamentoMB.nomeUnidade}"
+								readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+							<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+								title="Pesquisa" action="#{selecaoUnidadeMB.abrirDialogo}"
+								process="@this" update="@none">
+								<p:ajax event="dialogReturn"
+									listener="#{agendamentoMB.unidadeSelecionada}" process="@this"
+									update="unidade" />
+								<p:resetInput target="unidade" />
+							</p:commandButton>
+							<h:outputLabel />
+
+							<p:outputLabel value="Tipo de atendimento: " for="tipo" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+							<p:selectOneMenu id="tipo" required="true"
+								value="#{agendamentoMB.agendamento.tipo}" style="width:125px">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItems value="#{utilMB.listAtendimentos}" />
+							</p:selectOneMenu>
+
+
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel header="Selecione o paciente: ">
+						<h:panelGrid columns="3" cellpadding="5">
+							<h:outputLabel value="Paciente:" for="paciente" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+							<p:inputText id="paciente" required="true"
+								value="#{agendamentoMB.nomePaciente}"
+								readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+							<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+								title="Pesquisa" action="#{selecaoPacienteMB.abrirDialogo}"
+								process="@this" update="@none">
+								<p:ajax event="dialogReturn"
+									listener="#{agendamentoMB.pacienteSelecionado}" process="@this"
+									update="paciente" />
+								<p:resetInput target="paciente" />
+							</p:commandButton>
+							<h:outputLabel />
+
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel header="Selecione o Especialista: ">
+						<h:panelGrid columns="3" cellspadding="5">
+							<h:outputLabel value="Dr(a):" for="medico" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+							<p:inputText id="medico" required="true"
+								value="#{agendamentoMB.nomeMedico}"
+								readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+							<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
+								title="Pesquisa" action="#{selecaoMedicoMB.abrirDialogo}"
+								process="@this" update="@none">
+								<p:ajax event="dialogReturn"
+									listener="#{agendamentoMB.medicoSelecionado}" process="@this"
+									update="medico" />
+								<p:resetInput target="medico" />
+							</p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel header="Data e Hora:">
+						<h:panelGrid columns="3" cellspadding="15" cellspacing="15">
+
+
+							<p:outputLabel value="Data: " for="dataConsulta" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+
+							<p:calendar id="dataConsulta" required="true" locale="pt"
+								value="#{agendamentoMB.dataAgendamento}" pattern="dd/MM/yyyy"
+								showOn="button">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</p:calendar>
+							<p:outputLabel />
+							<h:outputLabel />
+
+
+							<p:outputLabel value="Horário: " for="horaConsulta" />
+							<h:outputLabel />
+							<h:outputLabel />
+
+
+							<p:selectOneMenu id="horaConsulta" required="true"
+								value="#{agendamentoMB.horaAgendamento}" style="width:125px">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItem itemLabel="8:00" itemValue="8:00" />
+								<f:selectItem itemLabel="8:30" itemValue="8:30" />
+								<f:selectItem itemLabel="9:00" itemValue="9:00" />
+								<f:selectItem itemLabel="9:30" itemValue="9:30" />
+								<f:selectItem itemLabel="10:00" itemValue="10:00" />
+								<f:selectItem itemLabel="10:30" itemValue="10:30" />
+								<f:selectItem itemLabel="11:00" itemValue="11:00" />
+								<f:selectItem itemLabel="11:30" itemValue="11:30" />
+								<f:selectItem itemLabel="12:00" itemValue="12:00" />
+								<f:selectItem itemLabel="12:30" itemValue="12:30" />
+								<f:selectItem itemLabel="13:00" itemValue="13:00" />
+								<f:selectItem itemLabel="13:30" itemValue="13:30" />
+								<f:convertDateTime pattern="HH:mm" />
+							</p:selectOneMenu>
+
+
+
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:commandButton style="float:right;width:80px;"
+						action="#{agendamentoMB.salvaAgendamento}" type="submit"
+						value="Salvar" update="msgs" alt="Salvar Agendameto"
+						title="Salvar Agendameto" />
+
+
+
+
+				</h:panelGrid>
+
+
+			</p:fieldset>
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

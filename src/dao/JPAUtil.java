@@ -6,25 +6,48 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
-	
+
 	@Inject
-    private static PersistenceProperties properties;
-	
-	private static EntityManagerFactory fabrica;
-	
-		static{
-		fabrica = Persistence.createEntityManagerFactory("prontuni");
+	private static PersistenceProperties properties;
+
+	 private static EntityManagerFactory fabrica;
+
+	// static {
+	/// fabrica = Persistence.createEntityManagerFactory("prontuni");
+	// }
+
+	public JPAUtil() {
+		super();
 	}
+
+	static {
+        try {
+        	fabrica = Persistence.createEntityManagerFactory("prontuni");
+             System.out.println("Entity Menager Test.............."+ fabrica);
+        } catch (Throwable ex) {
+
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+
+          }
+}
 	
-	public static EntityManager getEntityManager()
-	{
+	
+	// criar a fábrica de EntityManager para o banco da aplicação
+	//private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("prontuni");
+
+	public static EntityManager getEntityManager() {
 		return fabrica.createEntityManager();
 	}
 	
-	
-	
-	public void fechaLojinha() {
+	public static EntityManager criarEntityManager()
+	{
+		return fabrica.createEntityManager();
 		
+	}
+
+	public void fechaLojinha() {
+
 		fabrica.close();
 	}
 

@@ -1,0 +1,226 @@
+.fc-day-grid-event .fc-content {
+	background-color: #1BD7BB;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	min-width: 5% !important;
+	max-width: 100% !important;
+	position: relative;
+}
+/* SCHEDULE */
+.white-button.ui-button.ui-state-default {
+	background-color: #ffffff;
+	color: #222222;
+	border-color: #d6d6d6;
+	/* with the exported variables from Nova and Luna Themes*/
+	border-color: var(- -input-border-color, #d6d6d6);
+}
+
+.white-button.ui-button.ui-state-default:enabled:hover, .white-button.ui-button.ui-state-default:focus
+	{
+	background-color: #f2f2f2;
+	border-color: #ccc;
+	color: #373a3c;
+	/* with the exported variables from Nova and Luna Themes*/
+	border-color: var(- -input-hover-border-color, #ccc);
+}
+
+.fc th {
+    text-align: center;
+    background-color: #EEECF1;
+}
+
+
+.green-button.ui-button.ui-state-default {
+	background-color: #5cb85c;
+	border-color: #5cb85c;
+	color: #fff;
+}
+
+.green-button.ui-button.ui-state-default:enabled:hover, .green-button.ui-button.ui-state-default:focus
+	{
+	background-color: #4cae4c;
+	border-color: #5cb85c;
+}
+
+.red-button.ui-button.ui-state-default {
+	background-color: #d9534f;
+	border-color: #d9534f;
+	color: #fff;
+}
+
+.red-button.ui-button.ui-state-default:enabled:hover, .red-button.ui-button.ui-state-default:focus
+	{
+	background-color: #d43f3a;
+	border-color: #d9534f;
+}
+
+body .ui-steps .ui-steps-item {
+	width: 10% !important;
+	text-align: center;
+	/*DATALIST*/ . ui-datalist { width : 300px;
+	margin-bottom: 20px;
+}
+
+.ui-datalist-item {
+	padding: 3px;
+}
+
+.paginated .ui-datalist-data {
+	padding-left: 20px;
+}
+
+}
+.ui-steps .ui-steps-title {
+	display: block;
+	white-space: nowrap;
+	font-size: 13px !important;
+}
+
+.ui-steps .ui-steps-number {
+	font-size: 100% !important;
+	display: block;
+}
+
+body .ui-state-highlight {
+	text-shadow: none !important;
+}
+
+.ui-state-highlight a, .ui-widget-content .ui-state-highlight a,
+	.ui-widget-header .ui-state-highlight a {
+	color: #ffffff;
+	background-color: #ffd27f !important;
+}
+
+body .ui-steps.custom {
+	margin-bottom: 30px;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link {
+	height: 10px !important;
+	padding: 0 1em;
+	overflow: visible;
+	border: 1px solid #c8c8c8;
+	display: block;
+	background-color: #FFFFFF;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link .ui-steps-number
+	{
+	background-color: #ffd27f;
+	color: #FFFFFF;
+	display: inline-block;
+	width: 5px;
+	border-radius: 10px;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	position: relative;
+	top: -3px;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link .ui-steps-title {
+	margin-top: -6px !important;
+}
+
+body .ui-steps.custom .ui-steps-item.ui-state-highlight .ui-menuitem-link .ui-steps-title
+	{
+	color: #555;
+}
+
+/* GROWL */
+.ui-growl {
+	position: fixed;
+	top: 30%;
+	float: right;
+	padding-top: 60px;
+}
+/*LABEL NOME DO USUARIO*/
+.aw-labelUs {
+	float: right;
+	line-height: 50px;
+	margin-right: 30px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #fff;
+}
+
+.ui-widget-content-custom {
+	border: none !important;
+	background: #ffffff;
+	color: #333333;
+}
+
+#panel1 {
+	border: none !important;
+}
+
+/* TOGGLE */
+.aw-toggle {
+	float: right;
+	line-height: 50px;
+	margin-right: 50px;
+	color: #fff;
+	margin-top: 8px;
+}
+
+.aw-btnSair {
+	float: right;
+	line-height: 50px;
+	margin-right: 30px;
+	margin-top: 8px;
+}
+
+.aw-botaoMenu {
+	float: left;
+	line-height: 50px;
+	margin-left: 15px;
+	margin-top: 8px;
+	color: #fff;
+}
+
+/* MENU */
+.aw-menu {
+	font-size: 1.1em;
+}
+
+.aw-menu>ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.aw-menu>ul a {
+	display: block;
+	padding: 10px 15px;
+	text-decoration: none;
+	font-weight: 500;
+	color: #373737;
+}
+
+.aw-menu>ul i {
+	margin-right: 6px;
+}
+
+.aw-menu>ul a:hover, .aw-menu>ul a:focus {
+	background-color: #dfdfdf;
+}
+
+.aw-menu>ul .is-selected {
+	border-left: 3px solid #1e94d2;
+	background-color: #f3f3f3;
+}
+
+.aw-menu>ul .is-selected a {
+	margin-left: -3px;
+	color: #ffd27f;
+}
+
+/* PAGE-TITLE */
+.aw-page-title {
+	margin: 0;
+	padding: 5PX;
+	font-size: 1.5em;
+	color: #373737;
+}

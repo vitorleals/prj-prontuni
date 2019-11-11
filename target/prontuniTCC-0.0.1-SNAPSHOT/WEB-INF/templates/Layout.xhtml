@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<title><ui:insert name="title"></ui:insert></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>ProntUni</title>
+
+
+	<h:outputStylesheet library="prontuni" name="styles/custom.css" />
+	<h:outputStylesheet library="prontuni" name="styles/layout.css" />
+	<h:outputStylesheet library="prontuni" name="styles/components.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputScript target="body" library="prontuni"
+		name="javascripts/app.js" />
+</h:head>
+
+<h:body>
+
+	<header class="aw-topbar" id="menu">
+		<h:form>
+
+			<p:growl id="messages" />
+			<a href="#" class="aw-botaoMenu  js-toggle"><i
+				class="fa  fa-bars fa-2x"></i></a>
+
+			<h:graphicImage library="prontuni" name="images/texto_prontuni.png"
+				style="width:160px; padding-top:13px; margin-left:42%;" />
+
+
+			<p:commandButton id="btnLogout"
+				value="#{loginMB.usuario.pessoa.nome}" styleClass="aw-btnSair"
+				action="#{loginMB.acaoLogout}" update="messages" iconPos="right"
+				style="margin-right:25px;top:8px;" icon="fa fa-sign-out">
+
+
+			</p:commandButton>
+
+
+
+
+
+		</h:form>
+	</header>
+
+
+	<aside class="aw-sidebar  js-sidebar ">
+		<ui:insert name="menu" />
+
+		<pe:letterAvatar value="#{loginMB.usuario.pessoa.nome}" height="100"
+			width="100" rounded="true"
+			style="margin-left:25%;margin-top:30px;width:100px;padding:0;" />
+		<h1 style="text-align: center; margin-top: 10px;">#{loginMB.usuario.pessoa.nome}</h1>
+
+
+		<ui:include src="Menu.xhtml" />
+
+		<h:form>
+			<h:commandLink action="#{navMB.paginaMinhaConta}"
+				value="Relatar um problema "
+				style="bottom:10px;position:absolute;margin-left: 20%;text-decoration:none;">
+				<i class="fa  fa-fw fa-warning"></i>
+			</h:commandLink>
+		</h:form>
+	</aside>
+
+	<section class="aw-content  js-content">
+		<ui:insert name="content">
+		
+	
+			<p:growl id="messages" />
+		</ui:insert>
+
+
+	</section>
+
+
+</h:body>
+
+</html>

@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class JpaDAO<T> implements GenericDAO<T> {
 	protected Class<T> persistentClass;
-	private EntityManager manager;
+	private EntityManager manager = JPAUtil.getEntityManager();
 
 	/**
 	 * Método construtor que
