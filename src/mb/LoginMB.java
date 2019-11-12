@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.UsuarioDAO;
 import model.Usuario;
+import service.UsuarioService;
 
 @Named
 @ManagedBean(name = "loginMB")
@@ -157,7 +158,7 @@ public class LoginMB implements Serializable {
 		
 
 	};
-
+	/*
 	public void fecharUsuDAO() {
 
 		if (usuarioDAO.getEntityManager().isOpen()) {
@@ -182,5 +183,5 @@ public class LoginMB implements Serializable {
 
 	public void setSenhaCorreta(String senhaCorreta) {
 		this.senhaCorreta = senhaCorreta;
-	};
+	};*/
 }

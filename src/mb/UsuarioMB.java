@@ -68,7 +68,7 @@ public class UsuarioMB {
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
+/*
 	public String salvarUsuario() {
 
 		Date data = new Date();
@@ -104,6 +104,6 @@ public class UsuarioMB {
 		usuDao.getEntityManager().close();
 		usuDao = null;
 
-	};
+	};*/
 
 }
