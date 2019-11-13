@@ -6,17 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
 
 import mb.HashMB;
-import model.Agendamento;
-import model.Enfermeiro;
 import model.Medico;
 
 public class MedicoDAO {
 	
 	@Inject
-	private HashMB hashMb;
+	private HashMB hashMb = new HashMB();
 	
 	public List<Medico> lerTodos() {
 		try {
@@ -40,7 +37,7 @@ public class MedicoDAO {
 		try {
 			List<Medico> medicos = new ArrayList<Medico>();
 			
-			Iterator<HashMap.Entry<Integer, Medico>> iterator = this.hashMb.getMedicos().entrySet().iterator();
+			Iterator<HashMap.Entry<Integer, Medico>> iterator = hashMb.getMedicos().entrySet().iterator();
 			
 			while (iterator.hasNext()) {
 				HashMap.Entry<Integer, Medico> medicoHash = iterator.next();

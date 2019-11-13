@@ -2,21 +2,28 @@ package mb;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.MedicoDAO;
 import model.Medico;
 
 @ManagedBean(name = "medicoMB")
-@RequestScoped
+@SessionScoped
 public class MedicoMB {
 
 	private Medico medico = new Medico();
-	private MedicoDAO dao = new MedicoDAO();
+	private MedicoDAO dao;
 	private Date data;
+	
+	@PostConstruct
+	public void init() {
+		
+		dao = new MedicoDAO();
+	}
 
 	public Medico getMedico() {
 		return medico;

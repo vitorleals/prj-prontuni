@@ -6,7 +6,6 @@ import java.util.Iterator;
 import javax.inject.Inject;
 
 import mb.HashMB;
-import model.Agendamento;
 import model.Enfermeiro;
 
 public class EnfermeiroDAO {

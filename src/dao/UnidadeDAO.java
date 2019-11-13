@@ -6,11 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
 
 import mb.HashMB;
-import model.Medico;
-import model.Paciente;
 import model.Unidade;
 
 public class UnidadeDAO {

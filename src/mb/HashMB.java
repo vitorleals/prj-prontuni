@@ -10,6 +10,7 @@ import model.Consulta;
 import model.Enfermeiro;
 import model.Medico;
 import model.Paciente;
+import model.Prontuario;
 import model.Unidade;
 
 @ManagedBean(name = "hashMB")
@@ -22,6 +23,9 @@ public class HashMB {
 	private HashMap<Integer, Agendamento> agendamentos = new HashMap<Integer, Agendamento>();
 	private HashMap<Integer, Unidade> unidades = new HashMap<Integer, Unidade>();
 	private HashMap<Integer, Consulta> consultas = new HashMap<Integer, Consulta>();
+	private HashMap<Integer, Prontuario> prontuarios = new HashMap<Integer, Prontuario>();
+		
+	
 	
 	public HashMap<Integer, Consulta> getConsultas() {
 		return consultas;
@@ -93,5 +97,17 @@ public class HashMB {
 	
 	public void addConsulta(Integer key, Consulta consulta) {
 		this.consultas.put(key, consulta);
+	}
+	
+	public void addProntuario(Integer key, Prontuario prontuario) {
+		this.prontuarios.put(key, prontuario);
+	}
+
+	public HashMap<Integer, Prontuario> getProntuarios() {
+		return prontuarios;
+	}
+
+	public void setProntuarios(HashMap<Integer, Prontuario> prontuarios) {
+		this.prontuarios = prontuarios;
 	}
 }

@@ -119,24 +119,22 @@ public class ProntuarioMB {
 
 	public void buscarHistorico(Integer codigo) {
 
-		 prontuario = prontDAO.lerPorId(codigo);
+		prontuario = prontDAO.lerPorId(codigo);
 
 		if (conDao == null) {
 			abrirConDAO();
 		}
 
 		historicoConsulta = conDao.lerPorProntuario(prontuario);
-		
+
 		fecharConDAO();
-		
-		
-		
+
 	}
-	
+
 	public String pagProntuario() {
-		
+
 		return "/prontuniTCC/restrito/consulta/detalheProntuario.jsf?faces-redirect=true";
-		
+
 	}
 
 	public void abrirProntDAO() {
@@ -146,13 +144,12 @@ public class ProntuarioMB {
 	};
 
 	public void fecharProntDAO() {
-		if (prontDAO.getEntityManager().isOpen()) {
-			prontDAO.fecharConexao();
-			prontDAO.getEntityManager().close();
-		}
-
-		prontDAO = null;
-
+		/*
+		 * if (prontDAO.getEntityManager().isOpen()) { prontDAO.fecharConexao();
+		 * prontDAO.getEntityManager().close(); }
+		 * 
+		 * prontDAO = null;
+		 */
 	}
 
 	public void abrirPacDAO() {
@@ -163,13 +160,11 @@ public class ProntuarioMB {
 
 	public void fecharPacDAO() {
 		/*
-		if (pacDAO.getEntityManager().isOpen()) {
-			pacDAO.fecharConexao();
-			pacDAO.getEntityManager().close();
-		}
-
-		pacDAO = null;
-		*/
+		 * if (pacDAO.getEntityManager().isOpen()) { pacDAO.fecharConexao();
+		 * pacDAO.getEntityManager().close(); }
+		 * 
+		 * pacDAO = null;
+		 */
 	};
 
 	public void abrirConDAO() {
@@ -180,12 +175,9 @@ public class ProntuarioMB {
 
 	public void fecharConDAO() {
 		/*
-		if (conDao.getEntityManager().isOpen()) {
-			conDao.fecharConexao();
-			conDao.getEntityManager().close();
-			conDao = null;
-		}
-		*/
+		 * if (conDao.getEntityManager().isOpen()) { conDao.fecharConexao();
+		 * conDao.getEntityManager().close(); conDao = null; }
+		 */
 	};
 
 }

@@ -5,15 +5,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import mb.HashMB;
 import model.Agendamento;
 
+@SessionScoped
 public class AgendamentoDAO {
 	
 	@Inject
-	private HashMB hashMb;
+	private HashMB hashMb = new HashMB();
 	
 	public List<Agendamento> lerTodos() {
 		List<Agendamento> agendamentos = new ArrayList<Agendamento>();

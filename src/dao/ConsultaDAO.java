@@ -5,17 +5,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import mb.HashMB;
-import model.Agendamento;
 import model.Consulta;
 import model.Prontuario;
 
+@SessionScoped
 public class ConsultaDAO {
 	
 	@Inject
-	private HashMB hashMb;
+	private HashMB hashMb = new HashMB();
 	
 	public List<Consulta> lerTodos() {
 		List<Consulta> consultas = new ArrayList<Consulta>();

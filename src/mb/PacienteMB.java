@@ -220,12 +220,13 @@ public class PacienteMB {
 			}
 
 			this.prontDAO.salvar(prontu);
+			this.pacienteDAO.salvar(paciente);
 
 			nome = "";
 			listPacientes = pacienteDAO.porNomeSemelhante(nome);
 
-			fecharProntDAO();
-			fecharPacDAO();
+			//fecharProntDAO();
+			//fecharPacDAO();
 
 			this.paciente = null;
 
@@ -282,14 +283,13 @@ public class PacienteMB {
 		}
 		Integer resultado = prontDAO.ultimoRegistro();
 		numeroProntuario = resultado.toString();
-		
-		if (numeroProntuario.isEmpty() ) {
+
+		if (numeroProntuario.isEmpty()) {
 			numeroProntuario = "1";
 		}
 
 		fecharProntDAO();
 
-		
 		return numeroProntuario;
 	}
 
@@ -308,13 +308,11 @@ public class PacienteMB {
 
 	public void fecharPacDAO() {
 		/*
-		if (pacienteDAO.getEntityManager().isOpen()) {
-			pacienteDAO.fecharConexao();
-			pacienteDAO.getEntityManager().close();
-		}
-
-		pacienteDAO = null;
-		*/
+		 * if (pacienteDAO.getEntityManager().isOpen()) { pacienteDAO.fecharConexao();
+		 * pacienteDAO.getEntityManager().close(); }
+		 * 
+		 * pacienteDAO = null;
+		 */
 	};
 
 	public void abrirProntDAO() {
@@ -324,13 +322,12 @@ public class PacienteMB {
 	};
 
 	public void fecharProntDAO() {
-		if (prontDAO.getEntityManager().isOpen()) {
-			prontDAO.fecharConexao();
-			prontDAO.getEntityManager().close();
-		}
-
-		prontDAO = null;
-
+		/*
+		 * if (prontDAO.getEntityManager().isOpen()) { prontDAO.fecharConexao();
+		 * prontDAO.getEntityManager().close(); }
+		 * 
+		 * prontDAO = null;
+		 */
 	}
 
 	public List<Paciente> getListPacientes() {
