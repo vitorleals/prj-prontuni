@@ -162,13 +162,14 @@ public class ProntuarioMB {
 	};
 
 	public void fecharPacDAO() {
+		/*
 		if (pacDAO.getEntityManager().isOpen()) {
 			pacDAO.fecharConexao();
 			pacDAO.getEntityManager().close();
 		}
 
 		pacDAO = null;
-
+		*/
 	};
 
 	public void abrirConDAO() {
@@ -178,12 +179,13 @@ public class ProntuarioMB {
 	};
 
 	public void fecharConDAO() {
-
+		/*
 		if (conDao.getEntityManager().isOpen()) {
 			conDao.fecharConexao();
 			conDao.getEntityManager().close();
 			conDao = null;
 		}
+		*/
 	};
 
 }

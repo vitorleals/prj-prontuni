@@ -666,12 +666,13 @@ public class AgendamentoMB implements Serializable {
 	};
 
 	public void fecharAgDAO() {
+		/*
 		if (agendamentoDAO.getEntityManager().isOpen()) {
 			agendamentoDAO.fecharConexao();
 			agendamentoDAO.getEntityManager().close();
 		}
 		agendamentoDAO = null;
-
+		*/
 	};
 
 	public void abrirPacDAO() {
@@ -681,11 +682,11 @@ public class AgendamentoMB implements Serializable {
 	};
 
 	public void fecharPacDAO() {
-
+		/*
 		pacienteDAO.fecharConexao();
 		pacienteDAO.getEntityManager().close();
 		pacienteDAO = null;
-
+		*/
 	};
 
 	public void abrirMedDAO() {
@@ -695,11 +696,11 @@ public class AgendamentoMB implements Serializable {
 	};
 
 	public void fecharMedDAO() {
-
+		/*
 		medDao.fecharConexao();
 		medDao.getEntityManager().close();
 		medDao = null;
-
+		*/
 	};
 
 	public void abrirUniDAO() {
@@ -709,11 +710,11 @@ public class AgendamentoMB implements Serializable {
 	};
 
 	public void fecharUniDAO() {
-
+		/*
 		uniDao.fecharConexao();
 		uniDao.getEntityManager().close();
 		uniDao = null;
-
+		*/
 	}
 
 	public Date getDataAgendamento() {

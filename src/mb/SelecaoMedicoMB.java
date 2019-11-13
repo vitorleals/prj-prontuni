@@ -109,11 +109,11 @@ public class SelecaoMedicoMB {
 	};
 
 	public void fecharMedDAO() {
-
+		/*
 		medicoDAO.fecharConexao();
 		medicoDAO.getEntityManager().close();
 		medicoDAO = null;
-
+		*/
 	};
 
 }

@@ -110,11 +110,11 @@ public class SelecaoUnidadeMB implements Serializable {
 	};
 
 	public void fecharUniDAO() {
-
+		/*
 		uniDao.fecharConexao();
 		uniDao.getEntityManager().close();
 		uniDao = null;
-
+		*/
 	}
 
 	public List<Unidade> getListUnidadesTodos() {

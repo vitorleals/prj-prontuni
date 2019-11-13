@@ -110,11 +110,11 @@ public class SelecaoPacienteMB implements Serializable {
 	};
 
 	public void fecharPacDAO() {
-
+		/*
 		pacienteDAO.fecharConexao();
 		pacienteDAO.getEntityManager().close();
 		pacienteDAO = null;
-
+		*/
 	};
 
 }

@@ -5,8 +5,6 @@ import javax.persistence.TypedQuery;
 import model.Prontuario;
 
 public class ProntuarioDAO extends JpaDAO<Prontuario> {
-
-	
 	
 	public Integer ultimoRegistro() {
 

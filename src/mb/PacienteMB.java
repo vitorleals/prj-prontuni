@@ -307,13 +307,14 @@ public class PacienteMB {
 	};
 
 	public void fecharPacDAO() {
+		/*
 		if (pacienteDAO.getEntityManager().isOpen()) {
 			pacienteDAO.fecharConexao();
 			pacienteDAO.getEntityManager().close();
 		}
 
 		pacienteDAO = null;
-
+		*/
 	};
 
 	public void abrirProntDAO() {

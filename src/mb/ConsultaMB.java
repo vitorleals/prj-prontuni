@@ -560,12 +560,13 @@ public class ConsultaMB implements Serializable {
 	};
 
 	public void fecharConDAO() {
-
+		/*
 		if (consultaDao.getEntityManager().isOpen()) {
 			consultaDao.fecharConexao();
 			consultaDao.getEntityManager().close();
 			consultaDao = null;
 		}
+		*/
 	};
 
 	public void abrirAgDAO() {
@@ -575,13 +576,13 @@ public class ConsultaMB implements Serializable {
 	};
 
 	public void fecharAgDAO() {
-
+		/*
 		if (agDao.getEntityManager().isOpen()) {
 			agDao.fecharConexao();
 			agDao.getEntityManager().close();
 		}
 		agDao = null;
-
+		*/
 	}
 
 	public void abrirAteDAO() {
@@ -591,13 +592,13 @@ public class ConsultaMB implements Serializable {
 	};
 
 	public void fecharAteDAO() {
-
+		/*
 		if (ateDao.getEntityManager().isOpen()) {
 			ateDao.fecharConexao();
 			ateDao.getEntityManager().close();
 		}
 		ateDao = null;
-
+		*/
 	}
 
 	public void abrirPresDAO() {
@@ -607,13 +608,13 @@ public class ConsultaMB implements Serializable {
 	};
 
 	public void fecharPresDAO() {
-
+		/*
 		if (presDao.getEntityManager().isOpen()) {
 			presDao.fecharConexao();
 			presDao.getEntityManager().close();
 		}
 		presDao = null;
-
+		*/
 	}
 
 	public String getSis_dig_paciente() {

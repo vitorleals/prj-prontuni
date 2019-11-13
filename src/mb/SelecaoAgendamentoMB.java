@@ -90,11 +90,11 @@ public class SelecaoAgendamentoMB implements Serializable {
 	};
 
 	public void fecharAgDAO() {
-
+		/*
 		agDao.fecharConexao();
 		agDao.getEntityManager().close();
 		agDao = null;
-
+		*/
 	};
 
 }
