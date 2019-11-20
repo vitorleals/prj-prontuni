@@ -12,17 +12,17 @@
 
 		<h:form style="padding:20px;">
 			<div style="padding-top: 20px; margin-bottom: 20px">
-				<p:inputText id="nome" size="40" value="#{selecaoMedicoMB.nome}"
+				<p:inputText id="nome" size="40" value="#{medicoMB.nome}"
 					placeholder="Nome do Médico(a)" />
 
 				<p:spacer width="10px" />
 
 				<p:commandButton value="Pesquisar"
-					action="#{selecaoMedicoMB.pesquisar}" update="@form" />
+					action="#{medicoMB.pesquisar}" update="@form" />
 		
 			</div>
 
-			<p:dataTable value="#{selecaoMedicoMB.medicosFiltrados}"
+			<p:dataTable value="#{medicoMB.medicosFiltrados}"
 				var="medico" emptyMessage="Nenhum médico(a) encontrado." rows="10"
 				paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
@@ -47,7 +47,7 @@
 				</p:column>
 				<p:column style="width: 30px; text-align: center">
 					<p:commandButton icon="ui-icon-check" title="Selecionar"
-						action="#{selecaoMedicoMB.selecionar(medico)}" process="@this" />
+						action="#{medicoMB.selecionar(medico)}" process="@this" />
 				</p:column>
 
 			</p:dataTable>

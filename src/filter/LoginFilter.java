@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mb.HashMB;
 import mb.LoginMB;
 
 public class LoginFilter implements Filter {
@@ -36,6 +37,12 @@ public class LoginFilter implements Filter {
 			System.out.println(isLog);
 			
 			
+		}
+		
+		HashMB hashMb = (HashMB) (req.getSession().getAttribute("hashMB"));
+		if (hashMb == null) {
+			hashMb = new HashMB();
+
 		}
 		
 		if (loginMB == null) {

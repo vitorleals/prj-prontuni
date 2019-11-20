@@ -1,7 +1,9 @@
 package mb;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -15,18 +17,38 @@ import model.Unidade;
 
 @ManagedBean(name = "hashMB")
 @SessionScoped
-public class HashMB {
+public class HashMB implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
 	
 	private HashMap<Integer, Paciente> pacientes = new HashMap<Integer, Paciente>();
-	private HashMap<Integer, Medico> medicos = new HashMap<Integer, Medico>();	
-	private HashMap<Integer, Enfermeiro> enfermeiros = new HashMap<Integer, Enfermeiro>();	
+	private HashMap<Integer, Medico> medicos = new HashMap<Integer, Medico>();
+	private HashMap<Integer, Enfermeiro> enfermeiros = new HashMap<Integer, Enfermeiro>();
 	private HashMap<Integer, Agendamento> agendamentos = new HashMap<Integer, Agendamento>();
 	private HashMap<Integer, Unidade> unidades = new HashMap<Integer, Unidade>();
 	private HashMap<Integer, Consulta> consultas = new HashMap<Integer, Consulta>();
 	private HashMap<Integer, Prontuario> prontuarios = new HashMap<Integer, Prontuario>();
+	
+	
+	@PostConstruct
+	public void init() {
 		
+		Unidade unidade = new Unidade();
+		unidade.setId_unidade(1);
+		unidade.setNome_unidade("Unidade1");
+		
+		this.unidades = new HashMap<Integer, Unidade>();
+		this.unidades.put(1, unidade);
+		
+		
+	}
 	
-	
+
 	public HashMap<Integer, Consulta> getConsultas() {
 		return consultas;
 	}
@@ -46,15 +68,15 @@ public class HashMB {
 	public HashMap<Integer, Paciente> getPacientes() {
 		return this.pacientes;
 	}
-	
+
 	public HashMap<Integer, Medico> getMedicos() {
 		return this.medicos;
 	}
-	
+
 	public HashMap<Integer, Agendamento> getAgendamentos() {
 		return this.agendamentos;
 	}
-	
+
 	public HashMap<Integer, Unidade> getUnidades() {
 		return unidades;
 	}
@@ -78,27 +100,27 @@ public class HashMB {
 	public void addPaciente(Integer key, Paciente paciente) {
 		this.pacientes.put(key, paciente);
 	}
-	
+
 	public void addMedico(Integer key, Medico medico) {
 		this.medicos.put(key, medico);
 	}
-	
+
 	public void addEnfermeiro(Integer key, Enfermeiro enfermeiro) {
 		this.enfermeiros.put(key, enfermeiro);
 	}
-	
+
 	public void addAgendamento(Integer key, Agendamento agendamento) {
 		this.agendamentos.put(key, agendamento);
 	}
-	
+
 	public void addUnidade(Integer key, Unidade unidade) {
 		this.unidades.put(key, unidade);
-	}	
-	
+	}
+
 	public void addConsulta(Integer key, Consulta consulta) {
 		this.consultas.put(key, consulta);
 	}
-	
+
 	public void addProntuario(Integer key, Prontuario prontuario) {
 		this.prontuarios.put(key, prontuario);
 	}
@@ -110,4 +132,13 @@ public class HashMB {
 	public void setProntuarios(HashMap<Integer, Prontuario> prontuarios) {
 		this.prontuarios = prontuarios;
 	}
+	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	
+	
 }

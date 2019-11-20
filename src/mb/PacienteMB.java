@@ -1,7 +1,9 @@
 package mb;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -9,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 
 import dao.PacienteDAO;
@@ -34,6 +37,9 @@ public class PacienteMB {
 	private String numeroProntuario;
 	private String nome;
 
+	private String codProntuario;
+	private List<Paciente> pacientesFiltrados;
+
 	/*
 	 * 
 	 * METODOS GETTERS AND SETTERS
@@ -48,6 +54,7 @@ public class PacienteMB {
 
 		nome = "";
 		listPacientes = pacienteDAO.porNomeSemelhante(nome);
+		pacientesFiltrados = pacienteDAO.porNomeSemelhante(nome);
 
 		fecharPacDAO();
 
@@ -121,7 +128,21 @@ public class PacienteMB {
 			abrirPacDAO();
 		}
 		listPacientes = pacienteDAO.porNomeSemelhante(nome);
+		pacientesFiltrados = pacienteDAO.porNomeSemelhante(nome);
 		fecharPacDAO();
+	}
+
+	public void abrirDialogo() {
+		Map<String, Object> opcoes = new HashMap<>();
+		opcoes.put("modal", true);
+		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 470);
+
+		PrimeFaces.current().dialog().openDynamic("/restrito/paciente/selecaoPaciente", opcoes, null);
+	}
+
+	public void selecionar(Paciente paciente) {
+		PrimeFaces.current().dialog().closeDynamic(paciente);
 	}
 
 	public Prontuario getProntu() {
@@ -225,8 +246,8 @@ public class PacienteMB {
 			nome = "";
 			listPacientes = pacienteDAO.porNomeSemelhante(nome);
 
-			//fecharProntDAO();
-			//fecharPacDAO();
+			// fecharProntDAO();
+			// fecharPacDAO();
 
 			this.paciente = null;
 
@@ -336,6 +357,22 @@ public class PacienteMB {
 
 	public void setListPacientes(List<Paciente> listPacientes) {
 		this.listPacientes = listPacientes;
+	}
+
+	public String getCodProntuario() {
+		return codProntuario;
+	}
+
+	public void setCodProntuario(String codProntuario) {
+		this.codProntuario = codProntuario;
+	}
+
+	public List<Paciente> getPacientesFiltrados() {
+		return pacientesFiltrados;
+	}
+
+	public void setPacientesFiltrados(List<Paciente> pacientesFiltrados) {
+		this.pacientesFiltrados = pacientesFiltrados;
 	};
 
 }

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.UsuarioDAO;
 import model.Usuario;
-import service.UsuarioService;
 
 @Named
 @ManagedBean(name = "loginMB")
@@ -23,7 +22,9 @@ public class LoginMB implements Serializable {
 	private UsuarioDAO usuarioDAO = null;
 	private Usuario usuario;
 	private String tipoUsuario;
-
+	
+	private HashMB hashMB = new HashMB();
+	
 	private String login;
 	private String senha;
 
@@ -156,7 +157,16 @@ public class LoginMB implements Serializable {
 		this.usuarioDAO = new UsuarioDAO();
 		System.out.println("SAIU abrirUsuDAO");
 		
+	
 
+	}
+
+	public HashMB getHashMB() {
+		return hashMB;
+	}
+
+	public void setHashMB(HashMB hashMB) {
+		this.hashMB = hashMB;
 	};
 	/*
 	public void fecharUsuDAO() {

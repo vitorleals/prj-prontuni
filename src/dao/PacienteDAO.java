@@ -5,19 +5,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 
 import mb.HashMB;
 import model.Paciente;
 
+@ManagedBean
 @SessionScoped
 public class PacienteDAO {
 
-	@Inject
-	private HashMB hashMb = new HashMB();
+	@ManagedProperty("#{hashMB}")
+	private HashMB hashMb;
 
 	public List<Paciente> porNomeSemelhante(String nome) {
+		
+		recuperaMap();
+		
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 
 		Iterator<HashMap.Entry<Integer, Paciente>> iterator = this.hashMb.getPacientes().entrySet().iterator();
@@ -33,6 +38,9 @@ public class PacienteDAO {
 	}
 
 	public void salvar(Paciente paciente) {
+		
+		recuperaMap();
+		
 		HashMap<Integer, Paciente> pacientes = new HashMap<Integer, Paciente>();
 		Iterator<HashMap.Entry<Integer, Paciente>> iterator = this.hashMb.getPacientes().entrySet().iterator();
 
@@ -56,6 +64,9 @@ public class PacienteDAO {
 	}
 
 	public Paciente lerPorId(Integer id) {
+		
+		recuperaMap();
+		
 		Paciente paciente = new Paciente();
 		Iterator<HashMap.Entry<Integer, Paciente>> iterator = this.hashMb.getPacientes().entrySet().iterator();
 
@@ -70,6 +81,9 @@ public class PacienteDAO {
 	}
 
 	public Paciente lerPorCpf(String cpf) {
+		
+		recuperaMap();
+		
 		try {
 			Paciente paciente = new Paciente();
 
@@ -110,6 +124,9 @@ public class PacienteDAO {
 	 */
 
 	public List<Paciente> lerTodos() {
+		
+		recuperaMap();
+		
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 
 		Iterator<HashMap.Entry<Integer, Paciente>> iterator = this.hashMb.getPacientes().entrySet().iterator();
@@ -123,6 +140,9 @@ public class PacienteDAO {
 	}
 
 	public void excluir(Paciente paciente) {
+		
+		recuperaMap();
+		
 		HashMap<Integer, Paciente> pacientes = new HashMap<Integer, Paciente>();
 
 		Iterator<HashMap.Entry<Integer, Paciente>> iterator = this.hashMb.getPacientes().entrySet().iterator();
@@ -135,6 +155,21 @@ public class PacienteDAO {
 		}
 
 		this.hashMb.setPacientes(pacientes);
+	}
+	
+	public void recuperaMap() {
+
+		if (hashMb == null) {
+			hashMb = new HashMB();
+		}
+	}
+
+	public HashMB getHashMb() {
+		return hashMb;
+	}
+
+	public void setHashMb(HashMB hashMb) {
+		this.hashMb = hashMb;
 	}
 
 }

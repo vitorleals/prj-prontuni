@@ -165,7 +165,7 @@
 						size="28" />
 
 					<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
-						title="Pesquisa" action="#{selecaoMedicoMB.abrirDialogo}"
+						title="Pesquisa" action="#{medicoMB.abrirDialogo}"
 						process="@this" update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{agendamentoMB.medicoSelecionado}" process="@this"
@@ -180,7 +180,7 @@
 						size="28" />
 
 					<p:commandButton style="padding-left:5px;" icon="ui-icon-search"
-						title="Pesquisa" action="#{selecaoPacienteMB.abrirDialogo}"
+						title="Pesquisa" action="#{pacienteMB.abrirDialogo}"
 						process="@this" update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{agendamentoMB.pacienteSelecionado}" process="@this"

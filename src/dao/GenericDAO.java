@@ -4,8 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public interface GenericDAO<T>
-{
+public interface GenericDAO<T> {
 	public EntityManager getEntityManager();
 
 	public T lerPorId(Object id);
@@ -21,9 +20,5 @@ public interface GenericDAO<T>
 	public void gravarTransacao();
 
 	public void desfazerTransacao();
-	
-	
-	
-
 
 }
